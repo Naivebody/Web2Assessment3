@@ -68,7 +68,7 @@ CREATE TABLE `fundraiser` (
 
 LOCK TABLES `fundraiser` WRITE;
 /*!40000 ALTER TABLE `fundraiser` DISABLE KEYS */;
-INSERT INTO `fundraiser` (`FUNDRAISER_ID`, `ORGANIZER`, `CAPTION`, `TARGET_FUNDING`, `CURRENT_FUNDING`, `CITY`, `ACTIVE`, `CATEGORY_ID`) VALUES (6,'Alibaba','Server need',400000,150000,'Sydney',1,2),(8,'Jackie Chen','New film',200000,100000,'Hong Kong',1,3),(15,'Tencent','Construction',600000,100000,'Beijing',1,1),(32,'Valve','Deadlock dev',150000,50000,'LA',0,3),(34,'Jay Chou','New songs',50000,20000,'Shanghai',1,3);
+INSERT INTO `fundraiser` (`FUNDRAISER_ID`, `ORGANIZER`, `CAPTION`, `TARGET_FUNDING`, `CURRENT_FUNDING`, `CITY`, `ACTIVE`, `CATEGORY_ID`) VALUES (1,'Alibaba','Server need',400000,150000,'Sydney',1,2),(2,'Jackie Chen','New film',200000,100000,'Hong Kong',1,3),(3,'Tencent','Construction',600000,100000,'Beijing',1,1),(4,'Valve','Deadlock dev',150000,50000,'LA',0,3),(5,'Jay Chou','New songs',50000,20000,'Shanghai',1,3);
 /*!40000 ALTER TABLE `fundraiser` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -81,4 +81,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-09-30  3:50:47
+-- Dump completed on 2024-09-30  7:58:04

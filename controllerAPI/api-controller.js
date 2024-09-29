@@ -41,9 +41,11 @@ router.get("/search", (req, res)=>{
  * Response for GET method to retrieve conditional fundraisers from db
  */
 router.get("/search/:city", (req, res)=>{
-    connection.query("select * from FUNDRAISER JOIN CATEGORY ON FUNDRAISER.CATEGORY_ID = CATEGORY.CATEGORY_ID where ACTIVE=1 && CITY=" + req.params.city, (err, records,fields)=> {
+    connection.query("select * from FUNDRAISER JOIN CATEGORY ON FUNDRAISER.CATEGORY_ID = CATEGORY.CATEGORY_ID where ACTIVE=1 && CITY="+'"'+req.params.city+'"', (err, records,fields)=> {
         if (err){
-            console.error("Error while retrieve the data (Conditional Fundraiser)");
+            console.error("Error while retrieve the data (Conditional Fundraiser)",err);
+        }else if(records.length==0){
+            console.log("No records match!")
         }else{
             res.send(records);
         }
@@ -53,7 +55,7 @@ router.get("/search/:city", (req, res)=>{
 /**
  * Response for GET method to retrieve fundraiser details by ID from db
  */
-router.get("/fundraiser", (req, res)=>{
+router.get("/fundraiser/:id", (req, res)=>{
     connection.query("select * from FUNDRAISER where FUNDRAISER_ID="+ req.params.id, (err, records,fields)=> {
         if (err){
             console.error("Error while retrieve the data (Specific Fundraiser)");
