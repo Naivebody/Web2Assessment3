@@ -1,7 +1,7 @@
 /*  This file contains the data for database connection*/
 
-var dbDetails = require("./db-details");
-var mysql = require('mysql2');
+const dbDetails = require("./db-details");
+const mysql = require('mysql2');
 
 /**
  * Export the Connection method

@@ -1,7 +1,7 @@
 /*  This file is for accessing the database*/
-var dbcon = require("../dbconnect/crowdfunding_db");
-var express = require('express');
-var router = express.Router();
+const dbcon = require("../dbconnect/crowdfunding_db");
+const express = require('express');
+const router = express.Router();
 
 /**
  * Create a connection object
@@ -62,6 +62,9 @@ router.get("/fundraiser", (req, res)=>{
         }
     })
 })
+
+// Export API routes
+module.exports = router;
 
 
 
