@@ -74,58 +74,20 @@ router.get("/api/search/:city?/:organizer?/:category?", (req, res) => {
         }
         if (records.length === 0) {
             console.log("No records match!");
-            return res.status(404).send("No records found");
+            return res.json([]);
         }
-        res.send(records);
+        return res.send(records);
     });
 });
-
-// router.get("/api/search/:city?/:organizer?/:category?", (req, res) => {
-//     const city = req.params.city;
-//     const organizer = req.params.organizer ;
-//     const category = req.params.category ;
-//
-//     let query = `
-//         SELECT * FROM FUNDRAISER
-//         JOIN CATEGORY ON FUNDRAISER.CATEGORY_ID = CATEGORY.CATEGORY_ID
-//         WHERE ACTIVE = 1
-//     `;
-//
-//     const queryParams = [];
-//
-//     if (city) {
-//         query += ` AND FUNDRAISER.CITY = ?`;
-//         queryParams.push(city);
-//     }
-//     if (organizer) {
-//         query += ` AND FUNDRAISER.ORGANIZER = ?`;
-//         queryParams.push(organizer);
-//     }
-//     if (category) {
-//         query += ` AND CATEGORY.NAME = ?`;
-//         queryParams.push(category);
-//     }
-//
-//     console.log("Executing query:", query, queryParams);
-//     connection.query(query, queryParams, (err, records, fields) => {
-//         if (err) {
-//             console.error("Error while retrieving the data (Conditional Fundraiser)", err);
-//             return res.status(500).send("Server error");
-//         }
-//         if (records.length === 0) {
-//             console.log("No records match!");
-//             return res.status(404).send("No records found");
-//         }
-//         res.send(records);
-//     });
-// });
 
 
 /**
  * Response for GET method to retrieve fundraiser details by ID from db
  */
 router.get("/api/fundraiser/:id", (req, res)=>{
-    connection.query("select * from FUNDRAISER where FUNDRAISER_ID="+ req.params.id, (err, records,fields)=> {
+    connection.query("select * from FUNDRAISER " +
+        "JOIN CATEGORY ON FUNDRAISER.CATEGORY_ID = CATEGORY.CATEGORY_ID  " +
+        "where FUNDRAISER_ID="+ req.params.id, (err, records,fields)=> {
         if (err){
             console.error("Error while retrieve the data (Specific Fundraiser)");
         }else{

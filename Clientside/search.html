@@ -37,10 +37,22 @@
             }
             search(organizer,city,category);">
     <div id="data"></div>
+    <input type="button" value="Clear" onclick="clearCheckboxes()">
     <script>
+        /**
+         * Clear the information on screen
+         */
+        function clearCheckboxes() {
+            document.getElementById("organizer").value="";
+            document.getElementById("city").value="";
+            document.getElementById("category").value="";
+            document.getElementById("data").innerHTML=""
+        }
 
 
-
+        /**
+         * GET request for category
+         */
         fetch("http://localhost:3060/api/search")
             .then(response => {
                 if (!response.ok) {
@@ -67,6 +79,12 @@
                 document.getElementById('category').innerHTML = '<option value="">Failed to load categories</option>';
             });
 
+        /**
+         * GET request for conditional search
+         * @param organizer
+         * @param city
+         * @param category
+         */
         function search(organizer,city,category){
             let url = 'http://localhost:3060/api/search';
             let params = [];
@@ -97,12 +115,13 @@
                             //Create detail button
                             const detailButton = document.createElement("a")
                             detailButton.textContent = "View Details";
+                            detailButton.href = `/fundraiser?info=${fundraiser.FUNDRAISER_ID}`
                             newP.appendChild(detailButton);
                             dataDiv.appendChild(newP);
                         });
                     }
                     else{
-                        dataDiv.textContent="No fundraiser data";
+                        dataDiv.textContent="No matching fundraisers!";
                     }
                 })
                 .catch(error=>{
