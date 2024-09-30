@@ -17,17 +17,23 @@ server.use(bodyParser.json());
 server.use(bodyParser.urlencoded({extended:true}));
 
 /**
- *  Call the static resources of the homepage
+ * Redirect the URL to homepage
  */
 server.get("/",(req,res)=>{
     res.redirect('/home')
 });
 
+/**
+ *  Call the static resources of the homepage
+ */
 server.use(express.static(path.join(__dirname,'..','Clientside')));
-
 server.get("/home",(req,res)=>{
     res.sendFile(path.join(__dirname,'..','Clientside',"index.html"));
 });
+server.get("/search",(req,res)=>{
+    res.sendFile(path.join(__dirname,'..','Clientside',"search.html"));
+});
+
 /**
  *  Map the urls with the API
  *

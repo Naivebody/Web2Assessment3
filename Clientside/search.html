@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Fundme</title>
+</head>
+<body>
+    <h1>Search the fundraiser you want to know!</h1>
+    <nav><a href="/home"><span>Home</span></a> | <a href="/search"><span>Search</span></a></nav>
+    <label for="organizer">Organizer</label>
+    <input type="text" id="organizer" name="organizer">
+
+    <label for="city">City</label>
+    <input type="text" id="city" name="city" >
+
+    <label for="category">Category</label>
+    <select id="category" name="category" >
+        <option value="">Select a category</option>
+    </select>
+    <input type="button" value="Search" onclick="
+            let city=document.getElementById('city').value;
+            let organizer=document.getElementById('organizer').value;
+            let category=document.getElementById('category').value;
+            search(organizer,city,category);">
+
+    <script>
+
+        function search(organizer,city,category){
+            fetch("http://localhost:3060/api/search"+city+"/"+organizer+"/"+category)
+                .then(response => response.json())
+                .then(data => {
+                    const dataDiv=document.getElementById('data');
+                    dataDiv.innerHTML="";
+                    if(data.length>0){
+                        data.forEach(fundraiser => {
+                            const newP=document.createElement("p");
+                            newP.textContent= `
+                            ID: ${fundraiser.FUNDRAISER_ID}
+                            Organizer: ${fundraiser.ORGANIZER}
+                            Caption: ${fundraiser.CAPTION}
+                            City: ${fundraiser.CITY}
+                            `;
+                            //Create detail button
+                            const detailButton = document.createElement("a")
+                            detailButton.textContent = "View Details";
+                            newP.appendChild(detailButton);
+                            dataDiv.appendChild(newP);
+                        });
+                    }
+                    else{
+                        dataDiv.textContent="No fundraiser data";
+                    }
+                })
+                .catch(error=>{
+                    console.error("Error fetching data",error);
+                    document.getElementById('data').textContent="Failed to load data";
+                });
+        }
+        fetch("http://localhost:3060/api/search")
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return response.json();
+            })
+            .then(data => {
+                const categorySelect = document.getElementById('category');
+                categorySelect.innerHTML = '<option value="">Select a category</option>'; // Reset value
+                if (data.length > 0) {
+                    data.forEach(item => {
+                        const option = document.createElement('option');
+                        option.value = item.NAME;
+                        option.textContent = item.NAME;
+                        categorySelect.appendChild(option);
+                    });
+                } else {
+                    categorySelect.innerHTML = '<option value="">No categories available</option>';
+                }
+            })
+            .catch(error => {
+                console.error("Error fetching data", error);
+                document.getElementById('category').innerHTML = '<option value="">Failed to load categories</option>';
+            });
+    </script>
+
+
+</body>
+</html>

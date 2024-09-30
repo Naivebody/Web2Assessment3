@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
     <title>Fundme</title>
 
 </head>
@@ -9,7 +9,7 @@
     <h1>Welcome the crowdfunding home!</h1>
     <h2>One person donates, and everyone benefits</h2>
     <p>Your donation not only helped one person, but also brought positive impact to the entire society.</p>
-    <a href="/home"><span>Home</span></a> | <a href="/search"><span>Search</span></a>
+    <nav><a href="/home"><span>Home</span></a> | <a href="/search"><span>Search</span></a></nav>
     <script>
         //call GET API to get a list of Fundraiser
         fetch("http://localhost:3060/api/home")
@@ -18,9 +18,18 @@
                 const dataDiv=document.getElementById('data');
                 dataDiv.innerHTML="";
                 if(data.length>0){
-                    data.forEach( fundraiser => {
+                    data.forEach(fundraiser => {
                         const newP=document.createElement("p");
-                        newP.textContent=`Organizer: ${fundraiser.ORGANIZER}, City: ${fundraiser.CITY}`;
+                        newP.textContent= `
+                            ID: ${fundraiser.FUNDRAISER_ID}
+                            Organizer: ${fundraiser.ORGANIZER}
+                            Caption: ${fundraiser.CAPTION}
+                            City: ${fundraiser.CITY}
+                            `;
+                        //Create detail button
+                        const detailButton = document.createElement("a")
+                        detailButton.textContent = "View Details";
+                        newP.appendChild(detailButton);
                         dataDiv.appendChild(newP);
                     });
 
@@ -36,5 +45,11 @@
 
     </script>
     <div id="data"></div>
+    <h2>Contacts:</h2>
+    <div>
+        <p>email: kunye.student@scu.edu.au</p>
+        <p>phone number: 123456677</p>
+    </div>
+
 </body>
 </html>

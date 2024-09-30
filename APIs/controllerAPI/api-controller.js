@@ -40,17 +40,39 @@ router.get("/api/search", (req, res)=>{
 /**
  * Response for GET method to retrieve conditional fundraisers from db
  */
-router.get("/api/search/:city", (req, res)=>{
-    connection.query("select * from FUNDRAISER JOIN CATEGORY ON FUNDRAISER.CATEGORY_ID = CATEGORY.CATEGORY_ID where ACTIVE=1 && CITY="+'"'+req.params.city+'"', (err, records,fields)=> {
-        if (err){
-            console.error("Error while retrieve the data (Conditional Fundraiser)",err);
-        }else if(records.length==0){
-            console.log("No records match!")
-        }else{
-            res.send(records);
+router.get("/api/search/:city?/:organizer?/:category?", (req, res) => {
+    const city = req.params.city || "";
+    const organizer = req.params.organizer || "";
+    const category = req.params.category || "";
+
+    let query = `
+        SELECT * FROM FUNDRAISER 
+        JOIN CATEGORY ON FUNDRAISER.CATEGORY_ID = CATEGORY.CATEGORY_ID 
+        WHERE ACTIVE = 1
+    `;
+
+    if (city) {
+        query += ` AND (FUNDRAISER.CITY = "${city}" OR "${city}" = "")`;
+    }
+    if (organizer) {
+        query += ` AND (FUNDRAISER.ORGANIZER = "${organizer}" OR "${organizer}" = "")`;
+    }
+    if (category) {
+        query += ` AND (CATEGORY.NAME = "${category}" OR "${category}" = "")`;
+    }
+    console.log("Executing query:", query);
+    connection.query(query, (err, records, fields) => {
+        if (err) {
+            console.error("Error while retrieving the data (Conditional Fundraiser)", err);
+            return res.status(500).send("Server error");
         }
-    })
-})
+        if (records.length === 0) {
+            console.log("No records match!");
+            return res.status(404).send("No records found");
+        }
+        res.send(records);
+    });
+});
 
 /**
  * Response for GET method to retrieve fundraiser details by ID from db
