@@ -2,6 +2,7 @@
 const express = require("express");
 const bodyParser = require("body-parser");
 const cors = require("cors");
+const path=require("path");
 
 //Include our RESTFul APIs
 const appAPI = require("./controllerAPI/api-controller");
@@ -15,6 +16,18 @@ server.use(cors());
 server.use(bodyParser.json());
 server.use(bodyParser.urlencoded({extended:true}));
 
+/**
+ *  Call the static resources of the homepage
+ */
+server.get("/",(req,res)=>{
+    res.redirect('/home')
+});
+
+server.use(express.static(path.join(__dirname,'..','Clientside')));
+
+server.get("/home",(req,res)=>{
+    res.sendFile(path.join(__dirname,'..','Clientside',"index.html"));
+});
 /**
  *  Map the urls with the API
  *

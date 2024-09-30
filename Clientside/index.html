@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fundme</title>
+
+</head>
+<body>
+    <h1>Welcome the crowdfunding home!</h1>
+    <h2>One person donates, and everyone benefits</h2>
+    <p>Your donation not only helped one person, but also brought positive impact to the entire society.</p>
+    <a href="/home"><span>Home</span></a> | <a href="/search"><span>Search</span></a>
+    <script>
+        //call GET API to get a list of Fundraiser
+        fetch("http://localhost:3060/api/home")
+            .then(response => response.json())
+            .then(data => {
+                const dataDiv=document.getElementById('data');
+                dataDiv.innerHTML="";
+                if(data.length>0){
+                    data.forEach( fundraiser => {
+                        const newP=document.createElement("p");
+                        newP.textContent=`Organizer: ${fundraiser.ORGANIZER}, City: ${fundraiser.CITY}`;
+                        dataDiv.appendChild(newP);
+                    });
+
+                }
+                else{
+                    dataDiv.textContent="No fundraiser data";
+                }
+            })
+            .catch(error=>{
+                console.error("Error fecthing data",error);
+                document.getElementById('data').textContent="Failed to load data";
+            });
+
+    </script>
+    <div id="data"></div>
+</body>
+</html>
