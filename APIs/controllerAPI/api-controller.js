@@ -41,9 +41,9 @@ router.get("/api/search", (req, res)=>{
  * Response for GET method to retrieve conditional fundraisers from db
  */
 router.get("/api/search/:city?/:organizer?/:category?", (req, res) => {
-    const city = req.params.city || "";
-    const organizer = req.params.organizer || "";
-    const category = req.params.category || "";
+    const city = req.params.city && req.params.city.trim() !== '' ? req.params.city : null;
+    const organizer = req.params.organizer && req.params.organizer.trim() !== '' ? req.params.organizer : null;
+    const category = req.params.category && req.params.category.trim() !== '' ? req.params.category : null;
 
     let query = `
         SELECT * FROM FUNDRAISER 
@@ -51,17 +51,23 @@ router.get("/api/search/:city?/:organizer?/:category?", (req, res) => {
         WHERE ACTIVE = 1
     `;
 
+    const queryParams = [];
+
     if (city) {
-        query += ` AND (FUNDRAISER.CITY = "${city}" OR "${city}" = "")`;
+        query += ` AND FUNDRAISER.CITY = ?`;
+        queryParams.push(city);
     }
     if (organizer) {
-        query += ` AND (FUNDRAISER.ORGANIZER = "${organizer}" OR "${organizer}" = "")`;
+        query += ` AND FUNDRAISER.ORGANIZER = ?`;
+        queryParams.push(organizer);
     }
     if (category) {
-        query += ` AND (CATEGORY.NAME = "${category}" OR "${category}" = "")`;
+        query += ` AND CATEGORY.NAME = ?`;
+        queryParams.push(category);
     }
-    console.log("Executing query:", query);
-    connection.query(query, (err, records, fields) => {
+
+    console.log("Executing query:", query, queryParams);
+    connection.query(query, queryParams, (err, records, fields) => {
         if (err) {
             console.error("Error while retrieving the data (Conditional Fundraiser)", err);
             return res.status(500).send("Server error");
@@ -73,6 +79,47 @@ router.get("/api/search/:city?/:organizer?/:category?", (req, res) => {
         res.send(records);
     });
 });
+
+// router.get("/api/search/:city?/:organizer?/:category?", (req, res) => {
+//     const city = req.params.city;
+//     const organizer = req.params.organizer ;
+//     const category = req.params.category ;
+//
+//     let query = `
+//         SELECT * FROM FUNDRAISER
+//         JOIN CATEGORY ON FUNDRAISER.CATEGORY_ID = CATEGORY.CATEGORY_ID
+//         WHERE ACTIVE = 1
+//     `;
+//
+//     const queryParams = [];
+//
+//     if (city) {
+//         query += ` AND FUNDRAISER.CITY = ?`;
+//         queryParams.push(city);
+//     }
+//     if (organizer) {
+//         query += ` AND FUNDRAISER.ORGANIZER = ?`;
+//         queryParams.push(organizer);
+//     }
+//     if (category) {
+//         query += ` AND CATEGORY.NAME = ?`;
+//         queryParams.push(category);
+//     }
+//
+//     console.log("Executing query:", query, queryParams);
+//     connection.query(query, queryParams, (err, records, fields) => {
+//         if (err) {
+//             console.error("Error while retrieving the data (Conditional Fundraiser)", err);
+//             return res.status(500).send("Server error");
+//         }
+//         if (records.length === 0) {
+//             console.log("No records match!");
+//             return res.status(404).send("No records found");
+//         }
+//         res.send(records);
+//     });
+// });
+
 
 /**
  * Response for GET method to retrieve fundraiser details by ID from db
