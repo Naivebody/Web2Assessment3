@@ -7,11 +7,32 @@
 <body>
     <h1>Detail information</h1>
 
-    <nav><a href="/home"><span>Home</span></a> | <a href="/search"><span>Search</span></a></nav>
-    <div id="{{id}}" name="ID"></div>
+    <nav><a href="/index.html"><span>Home</span></a> | <a href="/search.html"><span>Search</span></a></nav>
+    <div id="id-placeholder" name="ID"></div>
     <div id="donate"></div>
     <input type="button" value="Donate" onclick="Donate()">
     <script>
+        /**
+         * Get ID from the query string on URL
+         * @returns {{}}
+         */
+        function getQueryParams() {
+            const params = {};
+            const queryString = window.location.search.substring(1);
+            const queries = queryString.split("&");
+            queries.forEach(query => {
+                const [key, value] = query.split("=");
+                params[key] = decodeURIComponent(value);
+            });
+            return params;
+        }
+        const params = getQueryParams();
+        const fundraiserId = params.info;
+        //Use the id value
+        const fundraiserIdElement = document.getElementById('id-placeholder');
+        fundraiserIdElement.id = fundraiserId;
+
+
         function Donate(){
             alert("This feature is under contruction");
         }

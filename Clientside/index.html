@@ -3,50 +3,63 @@
 <head>
     <meta charset="UTF-8">
     <title>Fundme</title>
+    <link rel="stylesheet" type="text/css" href="Clientside.css">
 
 </head>
 <body>
     <h1>Welcome the crowdfunding home!</h1>
     <h2>One person donates, and everyone benefits</h2>
     <p>Your donation not only helped one person, but also brought positive impact to the entire society.</p>
-    <nav><a href="/home"><span>Home</span></a> | <a href="/search"><span>Search</span></a></nav>
+    <nav><a href="/index.html"><span>Home</span></a> | <a href="/search.html"><span>Search</span></a></nav>
     <script>
         //call GET API to get a list of Fundraiser
         fetch("http://localhost:3060/api/home")
             .then(response => response.json())
             .then(data => {
-                const dataDiv=document.getElementById('data');
-                dataDiv.innerHTML="";
-                if(data.length>0){
+                const dataDiv = document.getElementById('data');
+                dataDiv.innerHTML = "";
+                if (data.length > 0) {
                     data.forEach(fundraiser => {
-                        const newP=document.createElement("p");
-                        newP.textContent= `
-                            ID: ${fundraiser.FUNDRAISER_ID}
-                            Organizer: ${fundraiser.ORGANIZER}
-                            Caption: ${fundraiser.CAPTION}
-                            City: ${fundraiser.CITY}
-                            `;
-                        //Create detail button
-                        const detailButton = document.createElement("a")
-                        detailButton.textContent = "View Details";
-                        newP.appendChild(detailButton);
-                        dataDiv.appendChild(newP);
-                    });
+                        const card = document.createElement("div");
+                        card.className = "fundraiser-card";
 
-                }
-                else{
-                    dataDiv.textContent="No fundraiser data";
+                        const id = document.createElement("p");
+                        id.textContent = `ID: ${fundraiser.FUNDRAISER_ID}`;
+                        card.appendChild(id);
+
+                        const organizer = document.createElement("p");
+                        organizer.textContent = `Organizer: ${fundraiser.ORGANIZER}`;
+                        card.appendChild(organizer);
+
+                        const caption = document.createElement("p");
+                        caption.textContent = `Caption: ${fundraiser.CAPTION}`;
+                        card.appendChild(caption);
+
+                        const city = document.createElement("p");
+                        city.textContent = `City: ${fundraiser.CITY}`;
+                        card.appendChild(city);
+
+                        const detailButton = document.createElement("a");
+                        detailButton.textContent = "View Details";
+                        detailButton.href = `/fundraiser?info=${fundraiser.FUNDRAISER_ID}`; // Add the actual link here
+                        card.appendChild(detailButton);
+
+                        dataDiv.appendChild(card);
+                    });
+                } else {
+                    dataDiv.textContent = "No fundraiser data";
                 }
             })
-            .catch(error=>{
-                console.error("Error fecthing data",error);
-                document.getElementById('data').textContent="Failed to load data";
+            .catch(error => {
+                console.error("Error fetching data", error);
+                document.getElementById('data').textContent = "Failed to load data";
             });
 
     </script>
     <div id="data"></div>
-    <h2>Contacts:</h2>
+
     <div>
+        <h2>Contacts</h2>
         <p>email: kunye.student@scu.edu.au</p>
         <p>phone number: 123456677</p>
     </div>

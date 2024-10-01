@@ -6,7 +6,7 @@
 </head>
 <body>
     <h1>Search the fundraiser you want to know!</h1>
-    <nav><a href="/home"><span>Home</span></a> | <a href="/search"><span>Search</span></a></nav>
+    <nav><a href="/index.html"><span>Home</span></a> | <a href="/search.html"><span>Search</span></a></nav>
     <label for="organizer">Organizer</label>
     <input type="text" id="organizer" name="organizer">
 
@@ -115,7 +115,7 @@
                             //Create detail button
                             const detailButton = document.createElement("a")
                             detailButton.textContent = "View Details";
-                            detailButton.href = `/fundraiser?info=${fundraiser.FUNDRAISER_ID}`
+                            detailButton.href = `/fundraiser_detail.html?info=${fundraiser.FUNDRAISER_ID}`
                             newP.appendChild(detailButton);
                             dataDiv.appendChild(newP);
                         });

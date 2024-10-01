@@ -20,20 +20,14 @@ server.use(bodyParser.urlencoded({extended:true}));
 /**
  * Redirect the URL to homepage
  */
-server.get("/",(req,res)=>{
-    res.redirect('/home')
-});
+// server.get("/",(req,res)=>{
+//     res.redirect('/home')
+// });
 
 /**
  *  Call the static resources of the homepage
  */
 server.use(express.static(path.join(__dirname,'..','Clientside')));
-server.get("/home",(req,res)=>{
-    res.sendFile(path.join(__dirname,'..','Clientside',"index.html"));
-});
-server.get("/search",(req,res)=>{
-    res.sendFile(path.join(__dirname,'..','Clientside',"search.html"));
-});
 server.get("/fundraiser",(req,res)=>{
     const id = req.query.info;
     fs.readFile(path.join(__dirname,'..','Clientside',"fundraiser_detail.html"), 'utf8', (err, data) => {
@@ -57,6 +51,6 @@ server.use(appAPI);
  */
 server.listen(3060);
 console.log("Server is up now and running on port 3060");
-console.log("URL: http://localhost:3060/");
+console.log("URL: http://localhost:3060/index.html");
 
 
