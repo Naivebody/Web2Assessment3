@@ -5,6 +5,8 @@ const cors = require("cors");
 const path=require("path");
 const fs = require('fs');
 
+
+
 //Include our RESTFul APIs
 const appAPI = require("./controllerAPI/api-controller");
 
@@ -20,9 +22,9 @@ server.use(bodyParser.urlencoded({extended:true}));
 /**
  * Redirect the URL to homepage
  */
-// server.get("/",(req,res)=>{
-//     res.redirect('/home')
-// });
+server.get("/",(req,res)=>{
+    res.redirect('/index.html');
+});
 
 /**
  *  Call the static resources of the homepage
