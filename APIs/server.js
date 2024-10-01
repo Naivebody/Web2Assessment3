@@ -28,17 +28,6 @@ server.use(bodyParser.urlencoded({extended:true}));
  *  Call the static resources of the homepage
  */
 server.use(express.static(path.join(__dirname,'..','Clientside')));
-server.get("/fundraiser",(req,res)=>{
-    const id = req.query.info;
-    fs.readFile(path.join(__dirname,'..','Clientside',"fundraiser_detail.html"), 'utf8', (err, data) => {
-        if (err) {
-            return res.status(500).send('File read error');
-        }
-        const html = data.replace('{{id}}', id);
-        return res.send(html);
-    });
-});
-
 
 /**
  *  Map the urls with the API
