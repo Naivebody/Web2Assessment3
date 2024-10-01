@@ -12,6 +12,7 @@
     <p>Your donation not only helped one person, but also brought positive impact to the entire society.</p>
     <nav><a href="/index.html"><span>Home</span></a> | <a href="/search.html"><span>Search</span></a></nav>
     <script>
+        const images = ["fundraise1.jpg","fundraise2.jpg","fundraise3.jpg","fundraise4.jpg","fundraise5.jpg"]
         //call GET API to get a list of Fundraiser
         fetch("http://localhost:3060/api/home")
             .then(response => response.json())
@@ -41,8 +42,12 @@
 
                         const detailButton = document.createElement("a");
                         detailButton.textContent = "View Details";
-                        detailButton.href = `/fundraiser?info=${fundraiser.FUNDRAISER_ID}`; // Add the actual link here
+                        detailButton.href = `/fundraiser?info=${fundraiser.FUNDRAISER_ID}`; //Query String
                         card.appendChild(detailButton);
+
+                        const img = document.createElement("img");
+                        img.src = `/images/${images.pop()}`;
+                        card.appendChild(img);
 
                         dataDiv.appendChild(card);
                     });
