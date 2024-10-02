@@ -3,10 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <title>Fundme</title>
+    <link rel="stylesheet" type="text/css" href="Clientside.css">
+    <link rel="stylesheet" type="text/css" href="search.css">
 </head>
 <body>
     <h1>Search the fundraiser you want to know!</h1>
     <nav><a href="/index.html"><span>Home</span></a> | <a href="/search.html"><span>Search</span></a></nav>
+    <div class="search">
     <label for="organizer">Organizer</label>
     <input type="text" id="organizer" name="organizer">
 
@@ -36,8 +39,11 @@
                 category = defaultCategory;
             }
             search(organizer,city,category);">
+        </div>
     <div id="data"></div>
+    <div class="search">
     <input type="button" value="Clear" onclick="clearCheckboxes()">
+    </div>
     <script>
         /**
          * Clear the information on screen
@@ -85,7 +91,8 @@
          * @param city
          * @param category
          */
-        function search(organizer,city,category){
+        function search(organizer, city, category) {
+            const images = ["fundraise1.jpg","fundraise2.jpg","fundraise3.jpg","fundraise4.jpg","fundraise5.jpg"]
             let url = 'http://localhost:3060/api/search';
             let params = [];
 
@@ -101,33 +108,59 @@
             fetch(url)
                 .then(response => response.json())
                 .then(data => {
-                    const dataDiv=document.getElementById('data');
-                    if(data.length>0){
-                        dataDiv.innerHTML = "";
+                    const dataDiv = document.getElementById('data');
+                    dataDiv.innerHTML = ""; // 清空之前的内容
+                    if (data.length > 0) {
                         data.forEach(fundraiser => {
-                            const newP=document.createElement("p");
-                            newP.textContent= `
-                            ID: ${fundraiser.FUNDRAISER_ID}
-                            Organizer: ${fundraiser.ORGANIZER}
-                            Caption: ${fundraiser.CAPTION}
-                            City: ${fundraiser.CITY}
-                            `;
-                            //Create detail button
-                            const detailButton = document.createElement("a")
+                            const card = document.createElement("div");
+                            card.className = "fundraiser-card";
+
+                            const info = document.createElement("div");
+                            info.className = "info";
+                            card.appendChild(info);
+
+                            const id = document.createElement("p");
+                            id.textContent = `ID: ${fundraiser.FUNDRAISER_ID}`;
+                            info.appendChild(id);
+
+                            const organizer = document.createElement("p");
+                            organizer.textContent = `Organizer: ${fundraiser.ORGANIZER}`;
+                            info.appendChild(organizer);
+
+                            const caption = document.createElement("p");
+                            caption.textContent = `Caption: ${fundraiser.CAPTION}`;
+                            info.appendChild(caption);
+
+                            const city = document.createElement("p");
+                            city.textContent = `City: ${fundraiser.CITY}`;
+                            info.appendChild(city);
+
+                            const detailButton = document.createElement("a");
                             detailButton.textContent = "View Details";
-                            detailButton.href = `/fundraiser_detail.html?info=${fundraiser.FUNDRAISER_ID}`
-                            newP.appendChild(detailButton);
-                            dataDiv.appendChild(newP);
+                            detailButton.href = `/fundraiser_detail.html?info=${fundraiser.FUNDRAISER_ID}`;
+                            detailButton.className = "detail-button"; // 添加类名以便于样式控制
+                            info.appendChild(detailButton);
+
+                            const img = document.createElement("img");
+                            img.src = `/images/${images.pop()}`;
+                            card.appendChild(img);
+
+                            dataDiv.appendChild(card);
                         });
-                    }
-                    else{
-                        dataDiv.textContent="No matching fundraisers!";
+                    } else {
+                        const card = document.createElement("div");
+                        card.className = "fundraiser-card";
+                        const notes = document.createElement("p");
+                        notes.textContent = `No matching fundraisers`;
+                        card.appendChild(notes);
+                        dataDiv.appendChild(card);
                     }
                 })
-                .catch(error=>{
-                    console.error("Error fetching data",error);
+                .catch(error => {
+                    console.error("Error fetching data", error);
                 });
         }
+
     </script>
 
 

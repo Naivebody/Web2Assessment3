@@ -24,26 +24,30 @@
                         const card = document.createElement("div");
                         card.className = "fundraiser-card";
 
+                        const info = document.createElement("div");
+                        info.className = "info";
+                        card.appendChild(info);
+
                         const id = document.createElement("p");
                         id.textContent = `ID: ${fundraiser.FUNDRAISER_ID}`;
-                        card.appendChild(id);
+                        info.appendChild(id);
 
                         const organizer = document.createElement("p");
                         organizer.textContent = `Organizer: ${fundraiser.ORGANIZER}`;
-                        card.appendChild(organizer);
+                        info.appendChild(organizer);
 
                         const caption = document.createElement("p");
                         caption.textContent = `Caption: ${fundraiser.CAPTION}`;
-                        card.appendChild(caption);
+                        info.appendChild(caption);
 
                         const city = document.createElement("p");
                         city.textContent = `City: ${fundraiser.CITY}`;
-                        card.appendChild(city);
+                        info.appendChild(city);
 
                         const detailButton = document.createElement("a");
                         detailButton.textContent = "View Details";
                         detailButton.href = `/fundraiser?info=${fundraiser.FUNDRAISER_ID}`; //Query String
-                        card.appendChild(detailButton);
+                        info.appendChild(detailButton);
 
                         const img = document.createElement("img");
                         img.src = `/images/${images.pop()}`;
