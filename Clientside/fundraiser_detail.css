@@ -1,0 +1,23 @@
+input[type="button"] {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    background-color: #2980b9; /* 与超链接颜色一致 */
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+#donate {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    max-width: 400px;
+    margin: 0 auto;
+}
+input[type="button"]:hover {
+    background-color: #1c598a; /* 与超链接悬停颜色一致 */
+}
+
+.error{
+    color: hsl(0, 100%, 40%);
+}
