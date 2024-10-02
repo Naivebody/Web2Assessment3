@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <title>Fundme</title>
     <link rel="stylesheet" type="text/css" href="Clientside.css">
-
 </head>
 <body>
     <h1>Welcome the crowdfunding home!</h1>
@@ -46,7 +45,7 @@
 
                         const detailButton = document.createElement("a");
                         detailButton.textContent = "View Details";
-                        detailButton.href = `/fundraiser?info=${fundraiser.FUNDRAISER_ID}`; //Query String
+                        detailButton.href = `/fundraiser_detail.html?info=${fundraiser.FUNDRAISER_ID}`; //Query String
                         info.appendChild(detailButton);
 
                         const img = document.createElement("img");
@@ -63,7 +62,6 @@
                 console.error("Error fetching data", error);
                 document.getElementById('data').textContent = "Failed to load data";
             });
-
     </script>
     <div id="data"></div>
 

@@ -109,7 +109,7 @@
                 .then(response => response.json())
                 .then(data => {
                     const dataDiv = document.getElementById('data');
-                    dataDiv.innerHTML = ""; // 清空之前的内容
+                    dataDiv.innerHTML = ""; 
                     if (data.length > 0) {
                         data.forEach(fundraiser => {
                             const card = document.createElement("div");
@@ -138,7 +138,7 @@
                             const detailButton = document.createElement("a");
                             detailButton.textContent = "View Details";
                             detailButton.href = `/fundraiser_detail.html?info=${fundraiser.FUNDRAISER_ID}`;
-                            detailButton.className = "detail-button"; // 添加类名以便于样式控制
+                            detailButton.className = "detail-button";
                             info.appendChild(detailButton);
 
                             const img = document.createElement("img");
