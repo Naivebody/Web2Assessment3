@@ -26,7 +26,7 @@ server.get("/",(req,res)=>{
 });
 
 /**
- *  Call the static resources of the homepage
+ *  Call the static resources of the project
  */
 server.use(express.static(path.join(__dirname,'..','Clientside')));
 

@@ -109,7 +109,7 @@
                 .then(response => response.json())
                 .then(data => {
                     const dataDiv = document.getElementById('data');
-                    dataDiv.innerHTML = ""; 
+                    dataDiv.innerHTML = "";
                     if (data.length > 0) {
                         data.forEach(fundraiser => {
                             const card = document.createElement("div");
