@@ -42,5 +42,3 @@ server.use(appAPI);
 server.listen(3060);
 console.log("Server is up now and running on port 3060");
 console.log("URL: http://localhost:3060/index.html");
-
-
