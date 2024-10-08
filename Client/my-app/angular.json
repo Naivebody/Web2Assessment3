@@ -3,9 +3,19 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "myapp": {
+    "my-app": {
       "projectType": "application",
-      "schematics": {},
+      "schematics": {
+        "@schematics/angular:component": {
+          "standalone": false
+        },
+        "@schematics/angular:directive": {
+          "standalone": false
+        },
+        "@schematics/angular:pipe": {
+          "standalone": false
+        }
+      },
       "root": "",
       "sourceRoot": "src",
       "prefix": "app",
@@ -13,7 +23,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:application",
           "options": {
-            "outputPath": "dist/myapp",
+            "outputPath": "dist/my-app",
             "index": "src/index.html",
             "browser": "src/main.ts",
             "polyfills": [
@@ -64,10 +74,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "myapp:build:production"
+              "buildTarget": "my-app:build:production"
             },
             "development": {
-              "buildTarget": "myapp:build:development"
+              "buildTarget": "my-app:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -99,6 +109,6 @@
     }
   },
   "cli": {
-    "analytics": "b141f32a-fb28-4615-96c3-2b326ea2da73"
+    "analytics": false
   }
 }
