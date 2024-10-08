@@ -8,7 +8,7 @@ describe('FundraiserDetailComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [FundraiserDetailComponent]
+      declarations: [FundraiserDetailComponent]
     })
     .compileComponents();
 
