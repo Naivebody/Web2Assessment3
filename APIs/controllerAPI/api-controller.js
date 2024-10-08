@@ -96,6 +96,75 @@ router.get("/api/fundraiser/:id", (req, res)=>{
     })
 })
 
+router.get('/api/fundraiser/:id', (req, res) => {
+    const fundraiserId = req.params.id;
+    const query = `
+        SELECT f.*, d.DONATION_ID, d.DATE, d.AMOUNT, d.GIVER
+        FROM FUNDRAISER f
+        LEFT JOIN DONATION d ON f.FUNDRAISE_ID = d.FUNDRAISER_ID
+        WHERE f.FUNDRAISE_ID = ?
+    `;
+    connection.query(query, [fundraiserId], (err, results) => {
+        if (err) {
+            return res.status(500).send(err);
+        }
+        res.json(results);
+    });
+});//Get
+
+router.post('/api/donation', (req, res) => {
+    const { DATE, AMOUNT, GIVER, FUNDRAISER_ID } = req.body;
+    const query = 'INSERT INTO DONATION (DATE, AMOUNT, GIVER, FUNDRAISER_ID) VALUES (?, ?, ?, ?)';
+    connection.query(query, [DATE, AMOUNT, GIVER, FUNDRAISER_ID], (err, result) => {
+        if (err) {
+            return res.status(500).send(err);
+        }
+        res.json({ message: 'Donation added', id: result.insertId });
+    });
+});//POST：Insert a new donation
+
+router.post('/api/fundraiser', (req, res) => {
+    const { ORGANIZER, CAPTION, TARGET_Founding, CURRENT_FUNDING, CITY, ACTIVE, CATEGORY_ID } = req.body;
+    const query = 'INSERT INTO FUNDRAISER (ORGANIZER, CAPTION, TARGET_Founding, CURRENT_FUNDING, CITY, ACTIVE, CATEGORY_ID) VALUES (?, ?, ?, ?, ?, ?, ?)';
+    connection.query(query, [ORGANIZER, CAPTION, TARGET_Founding, CURRENT_FUNDING, CITY, ACTIVE, CATEGORY_ID], (err, result) => {
+        if (err) {
+            return res.status(500).send(err);
+        }
+        res.json({ message: 'Fundraiser added', id: result.insertId });
+    });
+});//POST：Insert a new fundraiser
+
+router.put('/api/fundraiser/:id', (req, res) => {
+    const fundraiserId = req.params.id;
+    const { ORGANIZER, CAPTION, TARGET_Founding, CURRENT_FUNDING, CITY, ACTIVE, CATEGORY_ID } = req.body;
+    const query = 'UPDATE FUNDRAISER SET ORGANIZER = ?, CAPTION = ?, TARGET_Founding = ?, CURRENT_FUNDING = ?, CITY = ?, ACTIVE = ?, CATEGORY_ID = ? WHERE FUNDRAISE_ID = ?';
+    connection.query(query, [ORGANIZER, CAPTION, TARGET_Founding, CURRENT_FUNDING, CITY, ACTIVE, CATEGORY_ID, fundraiserId], (err, result) => {
+        if (err) {
+            return res.status(500).send(err);
+        }
+        res.json({ message: 'Fundraiser updated' });
+    });
+});//PUT
+
+router.delete('/api/fundraiser/:id', (req, res) => {
+    const fundraiserId = req.params.id;
+    const checkQuery = 'SELECT * FROM DONATION WHERE FUNDRAISER_ID = ?';
+    connection.query(checkQuery, [fundraiserId], (err, results) => {
+        if (err) {
+            return res.status(500).send(err);
+        }
+        if (results.length > 0) {
+            return res.status(400).json({ message: 'Cannot delete fundraiser with donations' });
+        }
+        const deleteQuery = 'DELETE FROM FUNDRAISER WHERE FUNDRAISE_ID = ?';
+        db.query(deleteQuery, [fundraiserId], (err, result) => {
+            if (err) {
+                return res.status(500).send(err);
+            }
+            res.json({ message: 'Fundraiser deleted' });
+        });
+    });
+});//delete
 // Export API routes
 module.exports = router;
 
