@@ -8,7 +8,7 @@ import {Category} from './class/Category';
   providedIn: 'root'
 })
 export class DataService {
-  private apiUrl = 'https://localhost:3060/api';
+  private apiUrl = 'http://localhost:3060/api';
   constructor(private http: HttpClient) { }
 
   /**
