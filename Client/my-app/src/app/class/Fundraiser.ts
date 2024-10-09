@@ -1,3 +1,5 @@
+import {FundraiserResponse} from './FundraiserResponse';
+
 /**
  * Fundraiser class stores the information about the specific fundraiser and its attributes
  * @export
@@ -14,23 +16,16 @@ export class Fundraiser {
   categoryID: number = 0;
   categoryName: string = '';
 
-  cunstructor(fundraiserID: number,
-              organizer: string,
-              caption: string,
-              target_funding: number,
-              current_funding: number,
-              city: string,
-              active: number,
-              categoryID: number,
-              categoryName: string) {
-    this.fundraiserID = fundraiserID;
-    this.organizer = organizer;
-    this.caption = caption;
-    this.target_funding = target_funding;
-    this.city = city;
-    this.active = active;
-    this.categoryID = categoryID;
-    this.current_funding = current_funding;
-    this.categoryName = categoryName;
+
+  constructor(data : FundraiserResponse) {
+    this.fundraiserID = data.FUNDRAISER_ID
+    this.organizer = data.ORGANIZER
+    this.caption = data.CAPTION
+    this.target_funding = data.TARGET_FUNDING
+    this.current_funding = data.CURRENT_FUNDING
+    this.city = data.CITY
+    this.active = data.ACTIVE
+    this.categoryID= data.CATEGORY_ID
+    this.categoryName = data.NAME
   }
 }

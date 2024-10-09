@@ -4,10 +4,10 @@
  * @class Category
  */
 export class Category {
-  categoryID: number = 0
-  name : string = ''
+  CATEGORY_ID: number = 0
+  NAME : string = ''
   constructor(categoryID: number , name: string) {
-    this.categoryID = categoryID;
-    this.name = name;
+    this.CATEGORY_ID = categoryID;
+    this.NAME = name;
   }
 }
