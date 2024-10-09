@@ -12,6 +12,7 @@ export class Fundraiser {
   city: string = '';
   active: number = 0;
   categoryID: number = 0;
+  categoryName: string = '';
 
   cunstructor(fundraiserID: number,
               organizer: string,
@@ -20,7 +21,8 @@ export class Fundraiser {
               current_funding: number,
               city: string,
               active: number,
-              categoryID: number) {
+              categoryID: number,
+              categoryName: string) {
     this.fundraiserID = fundraiserID;
     this.organizer = organizer;
     this.caption = caption;
@@ -29,5 +31,6 @@ export class Fundraiser {
     this.active = active;
     this.categoryID = categoryID;
     this.current_funding = current_funding;
+    this.categoryName = categoryName;
   }
 }
