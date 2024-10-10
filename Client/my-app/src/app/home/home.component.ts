@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component ,OnInit} from '@angular/core';
 import {Fundraiser} from '../class/Fundraiser';
 import {DataService} from '../data.service';
 
@@ -9,7 +9,7 @@ import {DataService} from '../data.service';
   templateUrl: './home.component.html',
   styleUrl: './home.component.css'
 })
-export class HomeComponent {
+export class HomeComponent implements OnInit {
   randomIMGnum : number = Math.floor(Math.random() * 5)
   fundraiser : Fundraiser[] = [];
 

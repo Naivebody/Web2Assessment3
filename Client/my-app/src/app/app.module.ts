@@ -6,6 +6,7 @@ import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
 import { SearchComponent } from './search/search.component';
 import { FundraiserDetailComponent } from './fundraiser-detail/fundraiser-detail.component';
+import {FormsModule} from "@angular/forms";
 
 @NgModule({
   declarations: [
@@ -14,11 +15,12 @@ import { FundraiserDetailComponent } from './fundraiser-detail/fundraiser-detail
     SearchComponent,
     FundraiserDetailComponent
   ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    HttpClientModule,
-  ],
+    imports: [
+        BrowserModule,
+        AppRoutingModule,
+        HttpClientModule,
+        FormsModule,
+    ],
   providers: [
     provideClientHydration()
   ],

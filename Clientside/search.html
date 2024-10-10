@@ -111,6 +111,7 @@
                     const dataDiv = document.getElementById('data');
                     dataDiv.innerHTML = "";
                     if (data.length > 0) {
+                        console.log(url);
                         data.forEach(fundraiser => {
                             const card = document.createElement("div");
                             card.className = "fundraiser-card";
