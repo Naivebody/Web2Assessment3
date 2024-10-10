@@ -1,7 +1,61 @@
 
   <h1>Search the fundraiser you want to know!</h1>
   <nav><a routerLink="/home"><span>Home</span></a> | <a routerLink="/search"><span>Search</span></a></nav>
-  <div class="search">
+  <div>
+    <form (ngSubmit)="searchFundraisers()">
+      <label for="organizer">Organizer:</label>
+      <input type="text" id="organizer" [(ngModel)]="criteria.organizer" name="organizer">
+  
+      <label for="city">City:</label>
+      <input type="text" id="city" [(ngModel)]="criteria.city" name="city">
+  
+      <label for="category">Category:</label>
+      <input type="text" id="category" [(ngModel)]="criteria.category" name="category">
+  
+      <button type="submit">Search</button>
+    </form>
+    <p>{{ message }}</p>
+  
+    <div *ngIf="fundraisers.length > 0">
+      <div *ngFor="let fundraiser of fundraisers" class="fundraiser-card">
+        <a [routerLink]="['/fundraiser', fundraiser.FUNDRAISE_ID]">
+          <div class="info">
+            <p>ID: {{ fundraiser.FUNDRAISE_ID }}</p>
+            <p>Organizer: {{ fundraiser.ORGANIZER }}</p>
+            <p>Title: {{ fundraiser.CAPTION }}</p>
+            <p>Target Funding($): {{ fundraiser.TARGET_FUNDING }}</p>
+            <p>Current Funding($): {{ fundraiser.CURRENT_FUNDING }}</p>
+            <p>City: {{ fundraiser.CITY }}</p>
+            <p>Activated: {{ fundraiser.ACTIVE === 1 ? 'Y' : 'N' }}</p>
+            <p>Category: {{ fundraiser.CATEGORY_NAME }}</p>
+          </div>
+        </a>
+      </div>
+    </div>
+  
+    <div *ngIf="fundraiser">
+      <div class="fundraiser-card">
+        <div class="info">
+          <p>ID: {{ fundraiser.FUNDRAISE_ID }}</p>
+          <p>Organizer: {{ fundraiser.ORGANIZER }}</p>
+          <p>Title: {{ fundraiser.CAPTION }}</p>
+          <p>Target Funding($): {{ fundraiser.TARGET_FUNDING }}</p>
+          <p>Current Funding($): {{ fundraiser.CURRENT_FUNDING }}</p>
+          <p>City: {{ fundraiser.CITY }}</p>
+          <p>Activated: {{ fundraiser.ACTIVE === 1 ? 'Y' : 'N' }}</p>
+          <p>Category: {{ fundraiser.CATEGORY_NAME }}</p>
+        </div>
+      </div>
+    </div>
+  
+    <div *ngIf="!fundraiser && errorMessage">
+      <p class="error">{{ errorMessage }}</p>
+    </div>
+  </div>
+  
+  
+  
+  <!-- <div class="search">
     <label for="organizer">Organizer</label>
     <input type="text" id="organizer" name="organizer">
 
@@ -17,4 +71,4 @@
   <div id="data"></div>
   <div class="search">
       <input type="button" value="Clear">
-  </div>
+  </div> -->
