@@ -1,4 +1,4 @@
-import { Component,OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {Category} from '../class/Category';
 import {DataService} from '../data.service';
 import {Fundraiser} from '../class/Fundraiser';
@@ -10,6 +10,7 @@ import {Fundraiser} from '../class/Fundraiser';
   styleUrl: './search.component.css'
 })
 export class SearchComponent implements OnInit {
+  randomIMGnum : number = Math.floor(Math.random() * 5)
   categories:Category[] = [];
   specificFundraisers : Fundraiser[] = [];
   city: string = '';
@@ -32,12 +33,19 @@ export class SearchComponent implements OnInit {
     )
   }
 
-  // getSpecificFundraiser(){
-  //   this.dataService.getFundraiserBySearch(this.city, this.organizer,this.category).subscribe(
-  //     (response: Fundraiser[]) => {
-  //       this.specificFundraisers = response;
-  //       console.log(this.specificFundraisers);
-  //     }
-  //   )
-  // }
+  getSpecificFundraiser(){
+    this.dataService.getFundraiserBySearch(this.city, this.organizer,this.category).subscribe(
+      (response: Fundraiser[]) => {
+        this.specificFundraisers = response;
+        console.log(this.specificFundraisers);
+      }
+    )
+  }
+
+  clearScreen(){
+    this.city='';
+    this.organizer='';
+    this.category='';
+    this.specificFundraisers=[];
+  }
 }

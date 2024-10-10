@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import {HttpClient} from "@angular/common/http";
-import {Observable} from "rxjs";
+import {Observable, of} from "rxjs";
 import {Fundraiser} from './class/Fundraiser';
 import {Category} from './class/Category';
 import { map } from 'rxjs/operators';
@@ -40,28 +40,39 @@ export class DataService {
    * @param category
    * @return @return {*} {Observable<Fundraiser>}
    */
-  // getFundraiserBySearch(city?: string, organizer?: string, category?: string):Observable<Fundraiser[]> {
-  //   let url = `${this.apiUrl}/search`;
-  //   const params  = [];
-  //   if (city) {
-  //     params.push(city);
-  //   }
-  //
-  //   if (organizer) {
-  //     params.push(organizer);
-  //   }
-  //
-  //   if (category) {
-  //     params.push(category);
-  //   }
-  //   if (params.length > 0) {
-  //     url += '/' + params.join('/');
-  //   }
-  //   console.log(url);
-  //   return this.http.get<FundraiserResponse[]>(url).pipe(
-  //     map(data => data.map( item => new Fundraiser(item)))
-  //   );
-  // }
+  getFundraiserBySearch(city?: string, organizer?: string, category?: string):Observable<Fundraiser[]> {
+    let url = `${this.apiUrl}/search`;
+    const params  = [];
+    if (city) {
+      params.push(city);
+    }else{
+      params.push(" ");
+    }
+
+    if (organizer) {
+      params.push(organizer);
+    }else{
+      params.push(" ");
+    }
+
+    if (category) {
+      params.push(category);
+    }else{
+      params.push(" ");
+    }
+    if (params.length > 0 ) {
+      url += '/' + params.join('/');
+    }
+    console.log(url);
+    if(url !== this.apiUrl +'/search/ '+'/ '+'/ '){
+    return this.http.get<FundraiserResponse[]>(url).pipe(
+      map(data => data.map( item => new Fundraiser(item)))
+    );
+    }else{
+      alert("At least one criteria.");
+      return of([]);
+    }
+  }
 
 
 

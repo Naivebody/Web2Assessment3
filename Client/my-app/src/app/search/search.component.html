@@ -1,7 +1,7 @@
 
   <h1>Search the fundraiser you want to know!</h1>
   <nav><a routerLink="/home"><span>Home</span></a> | <a routerLink="/search"><span>Search</span></a></nav>
-  <div class="search">
+  <div class="search" >
     <label for="organizer">Organizer</label>
     <input [(ngModel)]="organizer" type="text" id="organizer" name="organizer">
 
@@ -17,11 +17,22 @@
       </option>
       </ng-container>
     </select>
-    <input type="button" value="Search" >
+    <input type="button" value="Search" (click)="getSpecificFundraiser()">
   </div>
-  <div id="data">
-
+  <div id="data" >
+    <div *ngIf="specificFundraisers.length>0">
+      <div  *ngFor="let item of specificFundraisers" class="fundraiser-card">
+        <div id="info">
+          <p>ID: {{item.fundraiserID}}</p>
+          <p>Organizer: {{item.organizer}}</p>
+          <p>Caption: {{item.caption}}</p>
+          <p>City: {{item.city}}</p>
+          <a routerLink="/fundraiser?info={{item.fundraiserID}}">View Details</a>
+        </div>
+        <img src="assets/images/{{randomIMGnum}}.jpg">
+      </div>
+    </div>
   </div>
   <div class="search">
-      <input type="button" value="Clear">
+      <input type="button" value="Clear" (click)="clearScreen()">
   </div>
