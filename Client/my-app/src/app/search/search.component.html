@@ -21,7 +21,7 @@
   </div>
   <div id="data" >
     <div *ngIf="specificFundraisers.length>0">
-      <div  *ngFor="let item of specificFundraisers" class="fundraiser-card">
+      <div  *ngFor="let item of specificFundraisers;let i = index" class="fundraiser-card">
         <div id="info">
           <p>ID: {{item.fundraiserID}}</p>
           <p>Organizer: {{item.organizer}}</p>
@@ -29,7 +29,7 @@
           <p>City: {{item.city}}</p>
           <a routerLink="/fundraiser?info={{item.fundraiserID}}">View Details</a>
         </div>
-        <img src="assets/images/{{randomIMGnum}}.jpg">
+        <img src="assets/images/{{imgNum[i%imgNum.length]}}.jpg">
       </div>
     </div>
   </div>

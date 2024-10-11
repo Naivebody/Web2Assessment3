@@ -10,7 +10,7 @@ import {DataService} from '../data.service';
   styleUrl: './home.component.css'
 })
 export class HomeComponent implements OnInit {
-  randomIMGnum : number = Math.floor(Math.random() * 5)
+  imgNum : number[] =[1,2,3,4,5]
   fundraiser : Fundraiser[] = [];
 
   //Inject the data service

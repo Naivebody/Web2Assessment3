@@ -10,7 +10,7 @@ import {Fundraiser} from '../class/Fundraiser';
   styleUrl: './search.component.css'
 })
 export class SearchComponent implements OnInit {
-  randomIMGnum : number = Math.floor(Math.random() * 5)
+  imgNum : number[] =[1,2,3,4,5]
   categories:Category[] = [];
   specificFundraisers : Fundraiser[] = [];
   city: string = '';

@@ -5,7 +5,7 @@
 <nav><a routerLink="/home"><span>Home</span></a> | <a routerLink="/search"><span>Search</span></a></nav>
 <div id="data">
   <div *ngIf="fundraiser.length>0">
-    <div  *ngFor="let item of fundraiser" class="fundraiser-card">
+    <div  *ngFor="let item of fundraiser;let i = index" class="fundraiser-card">
       <div id="info">
       <p>ID: {{item.fundraiserID}}</p>
       <p>Organizer: {{item.organizer}}</p>
@@ -13,7 +13,7 @@
       <p>City: {{item.city}}</p>
       <a routerLink="/fundraiser?info={{item.fundraiserID}}">View Details</a>
       </div>
-      <img src="assets/images/{{randomIMGnum}}.jpg">
+      <img src="assets/images/{{imgNum[i%imgNum.length]}}.jpg">
     </div>
   </div>
 </div>
