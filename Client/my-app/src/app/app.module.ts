@@ -8,6 +8,7 @@ import { SearchComponent } from './search/search.component';
 import { FundraiserDetailComponent } from './fundraiser-detail/fundraiser-detail.component';
 import {FormsModule} from "@angular/forms";
 
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -19,7 +20,7 @@ import {FormsModule} from "@angular/forms";
         BrowserModule,
         AppRoutingModule,
         HttpClientModule,
-        FormsModule,
+        FormsModule
     ],
   providers: [
     provideClientHydration()

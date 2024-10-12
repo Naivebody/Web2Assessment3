@@ -1,6 +1,7 @@
 /*  This file is for accessing the database*/
 const dbcon = require("../dbconnect/crowdfunding_db");
 const express = require('express');
+const {query} = require("express");
 const router = express.Router();
 
 /**
@@ -85,13 +86,15 @@ router.get("/api/search/:city?/:organizer?/:category?", (req, res) => {
  * Response for GET method to retrieve fundraiser details by ID from db
  */
 router.get("/api/fundraiser/:id", (req, res)=>{
-    connection.query("select * from FUNDRAISER " +
-        "JOIN CATEGORY ON FUNDRAISER.CATEGORY_ID = CATEGORY.CATEGORY_ID  " +
-        "where FUNDRAISER_ID="+ req.params.id, (err, records,fields)=> {
+    const sql = "select * from FUNDRAISER " +
+        "JOIN CATEGORY ON FUNDRAISER.CATEGORY_ID = CATEGORY.CATEGORY_ID " +
+        "where FUNDRAISER_ID=" + req.params.id
+    connection.query(sql, (err, records)=> {
         if (err){
             console.error("Error while retrieve the data (Specific Fundraiser)");
         }else{
-            res.send(records);
+            console.log("Executing SQL:",sql);
+                res.send(records);
         }
     })
 })

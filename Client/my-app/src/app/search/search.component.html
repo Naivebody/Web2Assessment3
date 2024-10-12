@@ -27,7 +27,8 @@
           <p>Organizer: {{item.organizer}}</p>
           <p>Caption: {{item.caption}}</p>
           <p>City: {{item.city}}</p>
-          <a routerLink="/fundraiser?info={{item.fundraiserID}}">View Details</a>
+          <a [routerLink]="['/fundraiser']" [queryParams]="{info: item.fundraiserID}">View Details</a>
+<!--          Here to make sure the router can bring the params dynamically-->
         </div>
         <img src="assets/images/{{imgNum[i%imgNum.length]}}.jpg">
       </div>

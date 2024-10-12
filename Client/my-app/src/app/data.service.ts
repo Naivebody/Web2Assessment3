@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import {HttpClient} from "@angular/common/http";
-import {Observable, of} from "rxjs";
+import {Observable, of, tap} from "rxjs";
 import {Fundraiser} from './class/Fundraiser';
 import {Category} from './class/Category';
 import { map } from 'rxjs/operators';
@@ -34,11 +34,11 @@ export class DataService {
   }
 
   /**
-   * GET request method for specific Fundraiser by details
+   * GET request method for specific Fundraiser list by details
    * @param city
    * @param organizer
    * @param category
-   * @return @return {*} {Observable<Fundraiser>}
+   * @return {*} {Observable<Fundraiser>}
    */
   getFundraiserBySearch(city?: string, organizer?: string, category?: string):Observable<Fundraiser[]> {
     let url = `${this.apiUrl}/search`;
@@ -74,6 +74,16 @@ export class DataService {
     }
   }
 
+  /**
+   * GET request method for specific fundraiser by ID
+   * @param ID
+   * @return {*} {Observable<Fundraiser>[]}
+   */
+  getFundraiserByID(ID:number):Observable<Fundraiser[]> {
+    return this.http.get<FundraiserResponse[]>(this.apiUrl+"/fundraiser/"+ID).pipe(
+      map(data => data.map( item => new Fundraiser(item)))
+    );
+  }
 
 
 }

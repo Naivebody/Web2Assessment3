@@ -18,6 +18,7 @@ export class Fundraiser {
 
 
   constructor(data : FundraiserResponse) {
+    console.log("Inside constructor data:", data);
     this.fundraiserID = data.FUNDRAISER_ID
     this.organizer = data.ORGANIZER
     this.caption = data.CAPTION
