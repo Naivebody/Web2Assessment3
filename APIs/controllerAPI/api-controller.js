@@ -1,7 +1,6 @@
 /*  This file is for accessing the database*/
 const dbcon = require("../dbconnect/crowdfunding_db");
 const express = require('express');
-const {query} = require("express");
 const router = express.Router();
 
 /**
