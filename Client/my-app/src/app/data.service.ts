@@ -103,6 +103,11 @@ export class DataService {
     );
   }
 
+  /**
+   * POST request method for adding donation to specific fundraiser
+   * @param form
+   * @return {*} {Observable<any(For the json message)>}
+   */
   postDonationtoDB(form:NgForm):Observable<any>{
     return this.http.post<Donation>(`${this.apiUrl}/donate`,form);
   }
