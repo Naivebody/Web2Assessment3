@@ -2,7 +2,20 @@
 <h1>Detail information</h1>
 
 <nav><a routerLink="/home"><span>Home</span></a> | <a routerLink="/search"><span>Search</span></a></nav>
-<div [id]="dataID" name="ID"></div>
+<div [id]="dataID" name="ID">
+  <div  *ngFor="let item of fundraiser;let i = index" class="fundraiser-card">
+    <div id="info">
+      <p>ID: {{item.fundraiserID}}</p>
+      <p>Organizer: {{item.organizer}}</p>
+      <p>Caption: {{item.caption}}</p>
+      <p>City: {{item.city}}</p>
+      <p>Target Fund: {{item.target_funding}}</p>
+      <p>Current Fund: {{item.current_funding}}</p>
+      <p>Active: {{isActive}}</p>
+      <p>Category: {{item.categoryName}}</p>
+    </div>
+    <img src="assets/images/{{imgNum[i%imgNum.length]}}.jpg">
+</div>
 <div id="donate">
   <input type="button" value="Donate" >
 </div>

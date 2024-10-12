@@ -14,7 +14,7 @@
         <a [routerLink]="['/fundraiser']" [queryParams]="{info: item.fundraiserID}">View Details</a>
 <!--        Here to make sure the router can bring the params dynamically-->
       </div>
-      <img src="assets/images/{{imgNum[i%imgNum.length]}}.jpg">
+      <img src="assets/images/{{imgNum[(i+1)%imgNum.length]}}.jpg">
     </div>
   </div>
 </div>
