@@ -114,8 +114,10 @@ router.get("/api/fundraiser/donation/:id", (req, res)=>{
     })
 })
 
-
-router.post('/api/donation', (req, res) => {
+/**
+ * Post method API to insert a donation record into db
+ */
+router.post('/api/donate', (req, res) => {
     const { DATE, AMOUNT, GIVER, FUNDRAISER_ID } = req.body;
     const query = 'INSERT INTO DONATION (DATE, AMOUNT, GIVER, FUNDRAISER_ID) VALUES (?, ?, ?, ?)';
     connection.query(query, [DATE, AMOUNT, GIVER, FUNDRAISER_ID], (err, result) => {
@@ -124,8 +126,11 @@ router.post('/api/donation', (req, res) => {
         }
         res.json({ message: 'Donation added', id: result.insertId });
     });
-});//POST：Insert a new donation
+});
 
+/**
+ * POST method API to insert a fundraiser record into db
+ */
 router.post('/api/fundraiser', (req, res) => {
     const { ORGANIZER, CAPTION, TARGET_Founding, CURRENT_FUNDING, CITY, ACTIVE, CATEGORY_ID } = req.body;
     const query = 'INSERT INTO FUNDRAISER (ORGANIZER, CAPTION, TARGET_Founding, CURRENT_FUNDING, CITY, ACTIVE, CATEGORY_ID) VALUES (?, ?, ?, ?, ?, ?, ?)';
@@ -135,8 +140,11 @@ router.post('/api/fundraiser', (req, res) => {
         }
         res.json({ message: 'Fundraiser added', id: result.insertId });
     });
-});//POST：Insert a new fundraiser
+});
 
+/**
+ * PUT method API to update a fundraiser record into db
+ */
 router.put('/api/fundraiser/:id', (req, res) => {
     const fundraiserId = req.params.id;
     const { ORGANIZER, CAPTION, TARGET_Founding, CURRENT_FUNDING, CITY, ACTIVE, CATEGORY_ID } = req.body;
@@ -147,8 +155,11 @@ router.put('/api/fundraiser/:id', (req, res) => {
         }
         res.json({ message: 'Fundraiser updated' });
     });
-});//PUT
+});
 
+/**
+ * DELETE method API to update a fundraiser record into db
+ */
 router.delete('/api/fundraiser/:id', (req, res) => {
     const fundraiserId = req.params.id;
     const checkQuery = 'SELECT * FROM DONATION WHERE FUNDRAISER_ID = ?';
@@ -167,8 +178,8 @@ router.delete('/api/fundraiser/:id', (req, res) => {
             res.json({ message: 'Fundraiser deleted' });
         });
     });
-});//delete
-// Export API routes
+});
+
 module.exports = router;
 
 
