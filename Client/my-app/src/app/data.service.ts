@@ -5,6 +5,7 @@ import {Fundraiser} from './class/Fundraiser';
 import {Category} from './class/Category';
 import { map } from 'rxjs/operators';
 import { FundraiserResponse} from './class/FundraiserResponse';
+import {Donation} from './class/Donation';
 
 
 @Injectable({
@@ -82,6 +83,17 @@ export class DataService {
   getFundraiserByID(ID:number):Observable<Fundraiser[]> {
     return this.http.get<FundraiserResponse[]>(this.apiUrl+"/fundraiser/"+ID).pipe(
       map(data => data.map( item => new Fundraiser(item)))
+    );
+  }
+
+  getDonationByFundraiserID(ID:number):Observable<Donation[]> {
+    return this.http.get<Donation[]>(`${this.apiUrl}/fundraiser/donation/${ID}`).pipe(
+      map((data: Donation[]) =>{
+        return data.map(item =>{
+          item.DATE = new Date(item.DATE);
+          return item;
+        })
+      })
     );
   }
 

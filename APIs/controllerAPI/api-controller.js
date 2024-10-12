@@ -99,21 +99,20 @@ router.get("/api/fundraiser/:id", (req, res)=>{
     })
 })
 
-router.get('/api/fundraiser/:id', (req, res) => {
-    const fundraiserId = req.params.id;
-    const query = `
-        SELECT f.*, d.DONATION_ID, d.DATE, d.AMOUNT, d.GIVER
-        FROM FUNDRAISER f
-        LEFT JOIN DONATION d ON f.FUNDRAISE_ID = d.FUNDRAISER_ID
-        WHERE f.FUNDRAISE_ID = ?
-    `;
-    connection.query(query, [fundraiserId], (err, results) => {
-        if (err) {
-            return res.status(500).send(err);
+/**
+ * Response for GET method to retrieve donation details by FundraiserID from db
+ */
+router.get("/api/fundraiser/donation/:id", (req, res)=>{
+    const sql = "select * from DONATION where DONATION_ID= " + req.params.id ;
+    connection.query(sql, (err, records)=> {
+        if (err){
+            console.error("Error while retrieve the data (DONATION)");
+            res.send(err);
+        }else{
+            res.send(records);
         }
-        res.json(results);
-    });
-});//Get
+    })
+})
 
 router.post('/api/donation', (req, res) => {
     const { DATE, AMOUNT, GIVER, FUNDRAISER_ID } = req.body;

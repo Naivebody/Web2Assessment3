@@ -2,7 +2,7 @@
 <h1>Detail information</h1>
 
 <nav><a routerLink="/home"><span>Home</span></a> | <a routerLink="/search"><span>Search</span></a></nav>
-<div [id]="dataID" name="ID">
+<div [id]="dataID">
   <div  *ngFor="let item of fundraiser;let i = index" class="fundraiser-card">
     <div id="info">
       <p>ID: {{item.fundraiserID}}</p>
@@ -16,7 +16,17 @@
     </div>
     <img src="assets/images/{{imgNum[i%imgNum.length]}}.jpg">
 </div>
+  <h1>Donation list</h1>
+  <ng-container>
+      <div *ngFor="let item of donation" class="fundraiser-card">
+        <p>ID: {{item.DONATION_ID}}</p>
+        <p>Giver: {{item.GIVER}}</p>
+        <p>Donate date: {{item.DATE.toISOString().split('T')[0]}}</p>
+        <p>Amount: {{item.AMOUNT}}</p>
+      </div>
+  </ng-container>
 <div id="donate">
-  <input type="button" value="Donate" >
+  <input type="button" value="Add donation" >
 </div>
 
+</div>

@@ -2,7 +2,7 @@ import { Component,OnInit } from '@angular/core';
 import {DataService} from '../data.service';
 import {ActivatedRoute} from '@angular/router';
 import {Fundraiser} from '../class/Fundraiser';
-import {FundraiserResponse} from '../class/FundraiserResponse';
+import {Donation} from '../class/Donation';
 
 @Component({
   selector: 'app-fundraiser-detail',
@@ -13,7 +13,8 @@ export class FundraiserDetailComponent implements OnInit {
   imgNum : number[] =[1,2,3,4,5]
   isActive: boolean = false;
   dataID = 0;
-  fundraiser : Fundraiser[]=[]
+  fundraiser : Fundraiser[]=[];
+  donation : Donation[] = [];
  constructor(private dataService: DataService,private router: ActivatedRoute) { }
 
   ngOnInit() {
@@ -22,7 +23,8 @@ export class FundraiserDetailComponent implements OnInit {
     this.dataID = params['info'];
       console.log(this.dataID);//Debug if the ID has caught
     });
-    this.getFundraiserDetail()
+    this.getFundraiserDetail();
+    this.getDonationDetail();
   }
 
   getFundraiserDetail() {
@@ -32,11 +34,18 @@ export class FundraiserDetailComponent implements OnInit {
        if(this.fundraiser[0].active ===1){
          this.isActive = true;
        }
-       console.log(this.fundraiser);
+       console.log(Fundraiser,this.fundraiser);
      }
    )
   }
 
-
+  getDonationDetail() {
+    this.dataService.getDonationByFundraiserID(this.dataID).subscribe(
+      (response: Donation[]) =>{
+        this.donation = response;
+        console.log("Donation",this.donation);
+      }
+    )
+  }
 
 }
