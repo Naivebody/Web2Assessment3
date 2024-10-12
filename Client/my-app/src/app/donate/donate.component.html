@@ -2,8 +2,17 @@
 <h2>One person donates, and everyone benefits</h2>
 <p>Your donation not only helped one person, but also brought positive impact to the entire society.</p>
 <nav><a routerLink="/home"><span>Home</span></a> | <a routerLink="/search"><span>Search</span></a></nav>
-<form>
+<form #donationForm="ngForm" (ngSubmit)="onSubmit(donationForm)">
+  <label for="giver">Giver:</label>
+  <input type="text" id="giver" name="giver" ngModel required>
 
+  <label for="date">Date:</label>
+  <input type="date" id="date" name="date" ngModel required>
+
+  <label for="amount">Amount:</label>
+  <input type="number" id="amount" name="amount" ngModel required>
+
+  <button type="submit" [disabled]="!donationForm.form.valid">Submit</button>
 </form>
 
 
