@@ -6,6 +6,7 @@ import {Category} from './class/Category';
 import { map } from 'rxjs/operators';
 import { FundraiserResponse} from './class/FundraiserResponse';
 import {Donation} from './class/Donation';
+import {NgForm} from '@angular/forms';
 
 
 @Injectable({
@@ -78,7 +79,7 @@ export class DataService {
   /**
    * GET request method for specific fundraiser by ID
    * @param ID
-   * @return {*} {Observable<Fundraiser>[]}
+   * @return {*} {Observable<Fundraiser[]>}
    */
   getFundraiserByID(ID:number):Observable<Fundraiser[]> {
     return this.http.get<FundraiserResponse[]>(this.apiUrl+"/fundraiser/"+ID).pipe(
@@ -86,6 +87,11 @@ export class DataService {
     );
   }
 
+  /**
+   * GET request method for specific donation list by fundraiserID
+   * @param ID
+   * @return {*} {Observable<Donation[]>}
+   */
   getDonationByFundraiserID(ID:number):Observable<Donation[]> {
     return this.http.get<Donation[]>(`${this.apiUrl}/fundraiser/donation/${ID}`).pipe(
       map((data: Donation[]) =>{
@@ -95,6 +101,10 @@ export class DataService {
         })
       })
     );
+  }
+
+  postDonationtoDB(form:NgForm):Observable<any>{
+    return this.http.post<Donation>(`${this.apiUrl}/donate`,form);
   }
 
 

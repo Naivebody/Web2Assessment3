@@ -26,7 +26,7 @@
       </div>
   </ng-container>
 <div id="donate">
-  <input type="button" value="Add donation" [routerLink]="['/donate']">
+  <input type="button" value="Add donation" [routerLink]="['/donate']" [queryParams]="{info:fundraiser[0].fundraiserID}">
 </div>
 
 </div>
