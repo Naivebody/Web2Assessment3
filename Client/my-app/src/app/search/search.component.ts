@@ -10,6 +10,7 @@ import {Fundraiser} from '../class/Fundraiser';
   styleUrl: './search.component.css'
 })
 export class SearchComponent implements OnInit {
+  isWarning: boolean = false;
   imgNum : number[] =[1,2,3,4,5]
   categories:Category[] = [];
   specificFundraisers : Fundraiser[] = [];
@@ -34,6 +35,7 @@ export class SearchComponent implements OnInit {
   }
 
   getSpecificFundraiser(){
+    this.isWarning = true;
     this.dataService.getFundraiserBySearch(this.city, this.organizer,this.category).subscribe(
       (response: Fundraiser[]) => {
         this.specificFundraisers = response;

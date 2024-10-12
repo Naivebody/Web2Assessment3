@@ -20,7 +20,7 @@
     <input type="button" value="Search" (click)="getSpecificFundraiser()">
   </div>
   <div id="data" >
-    <div *ngIf="specificFundraisers.length>0">
+    <ng-container *ngIf="specificFundraisers.length>0">
       <div  *ngFor="let item of specificFundraisers;let i = index" class="fundraiser-card">
         <div id="info">
           <p>ID: {{item.fundraiserID}}</p>
@@ -32,7 +32,12 @@
         </div>
         <img src="assets/images/{{imgNum[i%imgNum.length]}}.jpg">
       </div>
-    </div>
+    </ng-container>
+    <ng-container>
+      <div class="fundraiser-card" *ngIf="specificFundraisers.length==0 && isWarning">
+        <h3 style="font-weight: bold; color:red">No matching fundraisers!</h3>
+      </div>
+    </ng-container>
   </div>
   <div class="search">
       <input type="button" value="Clear" (click)="clearScreen()">

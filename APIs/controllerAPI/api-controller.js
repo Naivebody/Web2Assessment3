@@ -114,6 +114,7 @@ router.get("/api/fundraiser/donation/:id", (req, res)=>{
     })
 })
 
+
 router.post('/api/donation', (req, res) => {
     const { DATE, AMOUNT, GIVER, FUNDRAISER_ID } = req.body;
     const query = 'INSERT INTO DONATION (DATE, AMOUNT, GIVER, FUNDRAISER_ID) VALUES (?, ?, ?, ?)';

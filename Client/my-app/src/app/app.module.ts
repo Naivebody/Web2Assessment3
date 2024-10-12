@@ -7,6 +7,7 @@ import { HomeComponent } from './home/home.component';
 import { SearchComponent } from './search/search.component';
 import { FundraiserDetailComponent } from './fundraiser-detail/fundraiser-detail.component';
 import {FormsModule} from "@angular/forms";
+import { DonateComponent } from './donate/donate.component';
 
 
 @NgModule({
@@ -14,7 +15,8 @@ import {FormsModule} from "@angular/forms";
     AppComponent,
     HomeComponent,
     SearchComponent,
-    FundraiserDetailComponent
+    FundraiserDetailComponent,
+    DonateComponent
   ],
     imports: [
         BrowserModule,
