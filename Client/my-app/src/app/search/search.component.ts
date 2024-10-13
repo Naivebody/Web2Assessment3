@@ -79,4 +79,21 @@ export class SearchComponent implements OnInit {
     this.category='';
     this.specificFundraisers=[];
   }
+  validateCity(){
+    this.city=this.city.trim();
+    const cityRegex = /^[A-Za-z\s]+$/;
+    if (!cityRegex.test(this.city)) {
+      alert("City name only can contain space and letters");
+    }
+  }
+
+  validateOrganizer(){
+    this.organizer=this.organizer.trim();
+    const organizerRegex = /^[A-Za-z\s]+$/;
+    if (!organizerRegex.test(this.organizer)) {
+      alert("Organizer name only can contain space and letters");
+    }
+  }
+
 }
+

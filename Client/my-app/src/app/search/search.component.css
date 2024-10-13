@@ -47,7 +47,6 @@ input[type="checkbox"] {
   display: none;
 }
 
-/* 创建自定义复选框 */
 input[type="checkbox"] + label {
   position: relative;
   padding-left: 30px;
@@ -55,7 +54,7 @@ input[type="checkbox"] + label {
   user-select: none;
 }
 
-/* 创建自定义复选框方框 */
+
 input[type="checkbox"] + label::before {
   content: "";
   position: absolute;
@@ -68,12 +67,12 @@ input[type="checkbox"] + label::before {
   background-color: white;
 }
 
-/* 显示选中的复选框 */
+
 input[type="checkbox"]:checked + label::before {
   background-color: #007bff;
 }
 
-/* 显示复选框里的对勾 */
+
 input[type="checkbox"]:checked + label::after {
   content: "";
   position: absolute;
@@ -86,7 +85,7 @@ input[type="checkbox"]:checked + label::after {
   transform: rotate(45deg);
 }
 
-/* 标签文本样式 */
+
 input[type="checkbox"] + label {
   margin-bottom: 10px;
   font-size: 1.2em;

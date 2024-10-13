@@ -3,10 +3,10 @@
   <nav><a routerLink="/home"><span>Home</span></a> | <a routerLink="/search"><span>Search</span></a></nav>
   <div class="search" >
     <label for="organizer">Organizer</label>
-    <input [(ngModel)]="organizer" type="text" id="organizer" name="organizer">
+    <input [(ngModel)]="organizer" type="text" id="organizer" name="organizer" (blur)="validateOrganizer()">
 
     <label for="city">City</label>
-    <input [(ngModel)]="city" type="text" id="city" name="city" >
+    <input [(ngModel)]="city" type="text" id="city" name="city" (blur)="validateCity()">
 
     <label for="category">Category</label>
     <select [(ngModel)]="category" id="category" name="category" >
