@@ -2,8 +2,7 @@
 const express = require("express");
 const bodyParser = require("body-parser");
 const cors = require("cors");
-const path=require("path");
-const fs = require('fs');
+
 
 
 //Include our RESTFul APIs
@@ -19,18 +18,6 @@ server.use(bodyParser.json());
 server.use(bodyParser.urlencoded({extended:true}));
 
 /**
- * Redirect the URL to homepage
- */
-server.get("/",(req,res)=>{
-    res.redirect('/index.html');
-});
-
-/**
- *  Call the static resources of the project
- */
-server.use(express.static(path.join(__dirname,'..','Clientside')));
-
-/**
  *  Map the urls with the API
  *
  */
@@ -41,4 +28,4 @@ server.use(appAPI);
  */
 server.listen(3060);
 console.log("Server is up now and running on port 3060");
-console.log("URL: http://localhost:3060/index.html");
+console.log("URL: http://localhost:3060/");
