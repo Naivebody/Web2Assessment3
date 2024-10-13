@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import {HttpClient} from '@angular/common/http';
-import {Fundraiser} from './Class/Fundraiser';
+import {Fundraiser} from './class/Fundraiser';
 import {map, Observable} from 'rxjs';
-import {FundraiserResponse} from './Class/FundraiserResponse';
-import {Category} from './Class/Category';
+import {FundraiserResponse} from './class/FundraiserResponse';
+import {Category} from './class/Category';
 import {NgForm} from '@angular/forms';
 
 @Injectable({

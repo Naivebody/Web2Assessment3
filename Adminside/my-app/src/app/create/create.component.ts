@@ -1,6 +1,6 @@
 import { Component ,OnInit} from '@angular/core';
 import {DataService} from '../data.service';
-import {Category} from '../Class/Category';
+import {Category} from '../class/Category';
 import {NgForm} from '@angular/forms';
 import {Router} from '@angular/router';
 

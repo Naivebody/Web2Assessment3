@@ -1,9 +1,9 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
-import {Category} from '../Class/Category';
+import {Category} from '../class/Category';
 import {DataService} from '../data.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {NgForm} from '@angular/forms';
-import {Fundraiser} from '../Class/Fundraiser';
+import {Fundraiser} from '../class/Fundraiser';
 
 @Component({
   selector: 'app-edit',
