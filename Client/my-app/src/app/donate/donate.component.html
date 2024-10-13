@@ -2,20 +2,38 @@
 <h2>One person donates, and everyone benefits</h2>
 <p>Your donation not only helped one person, but also brought positive impact to the entire society.</p>
 <nav><a routerLink="/home"><span>Home</span></a> | <a routerLink="/search"><span>Search</span></a></nav>
+<div class="container">
+  <div id="fundraiser">
+    <div class="info-column">
+        <h3>Fundraiser Information</h3>
+      <ul *ngFor="let item of fundraiser">
+        <li>ID:{{item.fundraiserID}}</li>
+        <li>Organizer:{{item.organizer}}</li>
+        <li>City: {{item.city}}</li>
+        <li>Target Fund: {{item.target_funding}}</li>
+        <li>Current Fund: {{item.current_funding}}</li>
+        <li>Active: {{isActive}}</li>
+        <li>Category: {{item.categoryName}}</li>
+      </ul>
+    </div>
+  </div>
+  <div class="form-column">
 <form #donationForm="ngForm" (ngSubmit)="onSubmit(donationForm)">
   <label for="fundraiser_id">Fundraiser_ID</label>
   <input type="number" id="fundraiser_id" name="FUNDRAISER_ID" [(ngModel)]="fundraiserID" ngModel required readonly>
 
   <label for="giver">Giver:</label>
-  <input type="text" id="giver" name="GIVER" ngModel required>
+  <input type="text" id="giver" name="GIVER" ngModel required maxlength="20" placeholder="Enter your english name">
 
   <label for="date">Date:</label>
   <input type="date" id="date" name="DATE" ngModel required>
 
   <label for="amount">Amount:</label>
-  <input type="number" id="amount" name="AMOUNT" ngModel required>
+  <input type="number" id="amount" name="AMOUNT" ngModel required placeholder="5 AUD minimum">
 
   <button type="submit" [disabled]="!donationForm.form.valid">Submit</button>
 </form>
+  </div>
 
+</div>
 

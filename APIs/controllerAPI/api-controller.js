@@ -102,7 +102,7 @@ router.get("/api/fundraiser/:id", (req, res)=>{
  * Response for GET method to retrieve donation details by FundraiserID from db
  */
 router.get("/api/fundraiser/donation/:id", (req, res)=>{
-    const sql = "select * from DONATION where DONATION_ID= " + req.params.id ;
+    const sql = "select * from DONATION where FUNDRAISER_ID= " + req.params.id ;
     connection.query(sql, (err, records)=> {
         if (err){
             console.error("Error while retrieve the data (DONATION)");
@@ -123,7 +123,7 @@ router.post('/api/donate', (req, res) => {
         if (err) {
             return res.status(500).send(err);
         }
-        res.json({ message: 'Donation added', id: result.insertId });
+        res.json({ message: 'Thank you for your donation to ', id: result.insertId });
     });
 });
 
