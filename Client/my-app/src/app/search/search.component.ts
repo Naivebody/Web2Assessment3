@@ -6,7 +6,7 @@ import {Component, OnInit} from '@angular/core';
 import {Category} from '../class/Category';
 import {DataService} from '../data.service';
 import {Fundraiser} from '../class/Fundraiser';
-/**
+/*
  * A decorator for a component, which defines the selector, template file, and style file for that component.
  */
 @Component({
@@ -14,7 +14,7 @@ import {Fundraiser} from '../class/Fundraiser';
   templateUrl: './search.component.html',
   styleUrl: './search.component.css'
 })
-/**
+/*
  * The SearchComponent implements the OnInit interface. isWarning Indicates whether to display warning information. 
  * imgNum is an array of numbers from 1 to 5 that are used for image presentation. categories Stores information for 
  * all categories. specificFundraisers stores a list of fundraisers with specific conditions. city, organizer, and 
@@ -30,13 +30,13 @@ export class SearchComponent implements OnInit {
   category:string = '';
   constructor(private dataService: DataService) {
   }
-  /**
+  /*
    * On initialization, the ngOnInit method calls the getCategorieslist method to get the category list.
    */
   ngOnInit() {
     this.getCategorieslist()
   }
-/**
+/*
  * Call dataService's getAllCategories method to get data for all categories from the server and assign 
  * them to the Categories array. When successful, print the data to the console.
  */
@@ -48,7 +48,7 @@ export class SearchComponent implements OnInit {
       }
     )
   }
-/**
+/*
  * The dataService's getFundraiserBySearch method, which searches by city, organizer, and category, 
  * retrieves a list of eligible fundraisers from the server and assigns them to an array of specificFundraisers. 
  * Also, set isWarning to true to display the warning message.
@@ -62,7 +62,7 @@ export class SearchComponent implements OnInit {
       }
     )
   }
-/**
+/*
  * Used to clear search criteria and results.
  */
   clearScreen(){

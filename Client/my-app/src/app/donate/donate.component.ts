@@ -7,7 +7,7 @@ import { NgForm} from '@angular/forms';
 import {DataService} from '../data.service';
 import {ActivatedRoute,Router} from '@angular/router';
 import {Fundraiser} from '../class/Fundraiser';
-/**
+/*
  * A decorator for a component, which defines the selector, template file, and style file for that component.
  */
 @Component({
@@ -15,7 +15,7 @@ import {Fundraiser} from '../class/Fundraiser';
   templateUrl: './donate.component.html',
   styleUrl: './donate.component.css'
 })
-/**
+/*
  * The HomeComponent implements the OnInit interface. imgNum is an array of numbers from 1 to 5 that is used for
  * image display. Fundraiser is used to store an array of fundraisers. DataService is a service passed in via dependency
  * injection to interact with background data.
@@ -25,7 +25,7 @@ export class DonateComponent implements OnInit {
   fundraiserID:number = 0;
   isActive: boolean = false;
   constructor(private dataService: DataService,private router: ActivatedRoute,private redirect: Router) { }
-/**
+/*
  * During initialization, the ngOnInit method will call the getHomeDatalist method to retrieve data.
  */
   ngOnInit() {
@@ -37,7 +37,7 @@ export class DonateComponent implements OnInit {
   }
 
 
-/**
+/*
  * Call the dataService's getAllFundraisers method to retrieve all fundraising campaign data from the server
  * and assign it to the fundraiser array. Successfully, print the data to the console.
  * @param form
