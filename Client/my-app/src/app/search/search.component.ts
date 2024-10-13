@@ -32,13 +32,13 @@ export class SearchComponent implements OnInit {
   active: number = 0;
   constructor(private dataService: DataService) {
   }
-  /*
+  /**
    * On initialization, the ngOnInit method calls the getCategorieslist method to get the category list.
    */
   ngOnInit() {
     this.getCategorieslist()
   }
-/*
+/**
  * Call dataService's getAllCategories method to get data for all categories from the server and assign
  * them to the Categories array. When successful, print the data to the console.
  */
@@ -50,7 +50,7 @@ export class SearchComponent implements OnInit {
       }
     )
   }
-/*
+/**
  * The dataService's getFundraiserBySearch method, which searches by city, organizer, and category,
  * retrieves a list of eligible fundraisers from the server and assigns them to an array of specificFundraisers.
  * Also, set isWarning to true to display the warning message.
@@ -70,7 +70,7 @@ export class SearchComponent implements OnInit {
       }
     )
   }
-/*
+/**
  * Used to clear search criteria and results.
  */
   clearScreen(){

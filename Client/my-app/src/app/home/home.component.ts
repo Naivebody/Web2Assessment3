@@ -1,7 +1,7 @@
 import { Component ,OnInit} from '@angular/core';
 import {Fundraiser} from '../class/Fundraiser';
 import {DataService} from '../data.service';
-/*
+/**
  * A decorator for a component, which defines the selector, template file, and style file for that component.
  */
 @Component({
@@ -25,7 +25,7 @@ export class HomeComponent implements OnInit {
     this.getHomeDatalist();
   }
 
-  /*
+  /**
    * Invoke the GET request method for data display
    */
   getHomeDatalist(){
