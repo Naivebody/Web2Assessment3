@@ -7,7 +7,7 @@ import { NgForm} from '@angular/forms';
 import {DataService} from '../data.service';
 import {ActivatedRoute,Router} from '@angular/router';
 import {Fundraiser} from '../class/Fundraiser';
-/*
+/**
  * A decorator for a component, which defines the selector, template file, and style file for that component.
  */
 @Component({
@@ -25,7 +25,7 @@ export class DonateComponent implements OnInit {
   fundraiserID:number = 0;
   isActive: boolean = false;
   constructor(private dataService: DataService,private router: ActivatedRoute,private redirect: Router) { }
-/*
+/**
  * During initialization, the ngOnInit method will call the getHomeDatalist method to retrieve data.
  */
   ngOnInit() {
@@ -37,7 +37,7 @@ export class DonateComponent implements OnInit {
   }
 
 
-/*
+/**
  * Call the dataService's getAllFundraisers method to retrieve all fundraising campaign data from the server
  * and assign it to the fundraiser array. Successfully, print the data to the console.
  * @param form
@@ -64,7 +64,7 @@ export class DonateComponent implements OnInit {
     return;
   }
 
-
+  //The data submitted by the form is processed and sent to the server
   if (form.valid) {
       console.log('Form Data:', form.value);
       this.dataService.postDonationtoDB(form.value).subscribe(
@@ -75,6 +75,9 @@ export class DonateComponent implements OnInit {
       )
     }
   }
+  /**
+   * Get the details of a specific fundraising project from the server.
+   */
   getFundraiser(){
     this.dataService.getFundraiserByID(this.fundraiserID).subscribe(
       (response: Fundraiser[]) =>{

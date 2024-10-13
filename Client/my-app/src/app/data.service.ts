@@ -7,8 +7,10 @@ import { map } from 'rxjs/operators';
 import { FundraiserResponse} from './class/FundraiserResponse';
 import {Donation} from './class/Donation';
 import {NgForm} from '@angular/forms';
-
-
+/**
+ * DataService is an Angular service class that interacts with backend APIs
+ * The @Injectable decorator marks the service as injectable and can be used in the root injector
+ */
 @Injectable({
   providedIn: 'root'
 })
@@ -16,7 +18,7 @@ export class DataService {
   private apiUrl = 'http://localhost:3060/api';
   constructor(private http: HttpClient) { }
 
-  /*
+  /**
    * GET request method for Fundraiser list
    * Here use map method to makesure the Fundraiser class attributes can match the data responded
    * @return {*} {Observable<Fundraiser[]>}
@@ -27,7 +29,7 @@ export class DataService {
     );
   }
 
-  /*
+  /**
    * GET request method for Category list
    * @return {*} {Observable<Category[]>}
    */
@@ -35,7 +37,7 @@ export class DataService {
     return this.http.get<Category[]>(this.apiUrl+'/search');
   }
 
-  /*
+  /**
    * GET request method for specific Fundraiser list by details
    * @param city
    * @param organizer
@@ -80,7 +82,7 @@ export class DataService {
     }
   }
 
-  /*
+  /**
    * GET request method for specific fundraiser by ID
    * @param ID
    * @return {*} {Observable<Fundraiser[]>}
@@ -91,7 +93,7 @@ export class DataService {
     );
   }
 
-  /*
+  /**
    * GET request method for specific donation list by fundraiserID
    * @param ID
    * @return {*} {Observable<Donation[]>}
@@ -107,7 +109,7 @@ export class DataService {
     );
   }
 
-  /*
+  /**
    * POST request method for adding donation to specific fundraiser
    * @param form
    * @return {*} {Observable<any(For the json message)>}
