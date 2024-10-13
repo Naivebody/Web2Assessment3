@@ -3,23 +3,42 @@ import {Category} from '../class/Category';
 import {DataService} from '../data.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {NgForm} from '@angular/forms';
-import {Fundraiser} from '../class/Fundraiser';
-
+import {Fundraiser} from '../Class/Fundraiser';
+/**
+ * @Component The decorator defines component metadata
+ * @selector Defines the selector for the component
+ * @templateUrl Specifies the HTML template file for the component
+ * @styleUrl specifies the CSS style file for the component
+ */
 @Component({
   selector: 'app-edit',
   templateUrl: './edit.component.html',
   styleUrl: './edit.component.css'
 })
 export class EditComponent implements OnInit {
+  // Use @ViewChild to get the form reference in the template
   @ViewChild('editForm') editForm!: NgForm
+  //The ID of the fundraising project
   fundraiserID:number =0;
+  //Used to store data for fundraising projects
   fundraiser:Fundraiser[]=[];
+  //Used to store all categories of data
   categories: Category[]=[];
+  // Boolean variable indicating whether it is active or not
   isActive:boolean = false;
+  //A numeric variable representing the active state
   active:number = 0;
+  /**
+   * The constructor injects DataService, Router, and ActivatedRoute
+   * @param dataService dataService Data service used for HTTP requests
+   * @param redirect redirect A routing service used for navigation
+   * @param router router Indicates the service used to obtain route parameters
+   */
   constructor(private dataService: DataService,private redirect: Router,private router: ActivatedRoute) {
   }
-
+  /**
+   * Initializes the form data
+   */
   initializeFormData(): void {
     const initialData = {
       ORGANIZER: this.fundraiser[0].organizer,
@@ -33,6 +52,9 @@ export class EditComponent implements OnInit {
     this.editForm.setValue(initialData);
     console.log(this.editForm.value)
   }
+  /**
+   * Called during component initialization to get routing parameters and data for all categories and funded items
+   */
   ngOnInit() {
     this.router.queryParams.subscribe(params => {
       this.fundraiserID = params['info'];
@@ -42,8 +64,11 @@ export class EditComponent implements OnInit {
     this.getFundraiser();
 
   }
-
-
+  /**
+   * Handles form submission events, performs data validation, and sends data to the server
+   * @param form 
+   * @returns 
+   */
   onSave(form: NgForm) {
     const target = form.value.TARGET_FUNDING;
     const city = form.value.CITY;
@@ -80,7 +105,9 @@ export class EditComponent implements OnInit {
       )
     }
   }
-
+  /**
+   * Gets data for all categories and assigns it to the Categories array
+   */
   getCategory(){
     this.dataService.getAllCategories().subscribe(
       (response: Category[]) => {
@@ -89,7 +116,9 @@ export class EditComponent implements OnInit {
       }
     )
   }
-
+  /**
+   * Gets the data for the fundraising project and initializes the form
+   */
   getFundraiser(){
     this.dataService.getFundraiserByID(this.fundraiserID).subscribe(
       (response: Fundraiser[]) => {
@@ -102,3 +131,4 @@ export class EditComponent implements OnInit {
 
 
 }
+
