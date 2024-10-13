@@ -1,0 +1,20 @@
+<h1>Fundraiser Admin Center</h1>
+<div id="fundraiser"><h3>Fundraiser List</h3>
+    <ng-container *ngFor="let item of fundraiser">
+      <div class="info-column">
+    <ul >
+      <h3>Fundraiser {{item.fundraiserID}}</h3>
+      <li>ID:{{item.fundraiserID}}</li>
+      <li>Organizer:{{item.organizer}}</li>
+      <li>Category: {{item.categoryName}}</li>
+      <li>Caption: {{item.caption}}</li>
+      <li>City: {{item.city}}</li>
+      <li>Target Fund: {{item.target_funding}}</li>
+      <li>Current Fund: {{item.current_funding}}</li>
+      <li *ngIf="item.active===1">Active: {{isActive}}</li>
+      <li *ngIf="item.active===0">Active: {{inActive}}</li>
+    </ul>
+      </div>
+    </ng-container>
+
+</div>

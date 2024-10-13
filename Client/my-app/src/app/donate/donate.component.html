@@ -9,11 +9,13 @@
       <ul *ngFor="let item of fundraiser">
         <li>ID:{{item.fundraiserID}}</li>
         <li>Organizer:{{item.organizer}}</li>
+        <li>Category: {{item.categoryName}}</li>
+        <li>Caption: {{item.caption}}</li>
         <li>City: {{item.city}}</li>
         <li>Target Fund: {{item.target_funding}}</li>
         <li>Current Fund: {{item.current_funding}}</li>
         <li>Active: {{isActive}}</li>
-        <li>Category: {{item.categoryName}}</li>
+
       </ul>
     </div>
   </div>
