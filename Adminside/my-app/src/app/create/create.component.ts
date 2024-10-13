@@ -1,24 +1,45 @@
+//Users can create fundraising projects through this component.
 import { Component ,OnInit} from '@angular/core';
 import {DataService} from '../data.service';
 import {Category} from '../class/Category';
 import {NgForm} from '@angular/forms';
 import {Router} from '@angular/router';
-
+/**
+ * Metadata for components, including selectors, template files, and style files.
+ */
 @Component({
   selector: 'app-create',
   templateUrl: './create.component.html',
   styleUrl: './create.component.css'
 })
+/*
+ * 
+ */
 export class CreateComponent implements OnInit {
+  // Stores arrays of all classes
   categories: Category[]=[];
+  // Boolean variable indicating whether it is active or not
   isActive:boolean = false;
+  // A numerical variable representing an active state
   active:number = 0;
+  /**
+   * Constructor injects DataService and Router
+   * @param dataService Data service for HTTP requests
+   * @param redirect Routing service used for navigation
+   */
   constructor(private dataService: DataService,private redirect: Router) {
   }
+  /**
+   * Called during component initialization to get data for all categories
+   */
   ngOnInit() {
     this.getCategory();
   }
-
+  /**
+   * Handles form submission events, performs data validation, and sends data to the server
+   * @param form Form object
+   * @returns 
+   */
   onSave(form: NgForm) {
     const target = form.value.TARGET_FUNDING;
     const city = form.value.CITY;
@@ -55,7 +76,9 @@ export class CreateComponent implements OnInit {
       )
     }
   }
-
+  /**
+  * Gets data for all categories and assigns it to the Categories array
+  */
   getCategory(){
     this.dataService.getAllCategories().subscribe(
       (response: Category[]) => {
