@@ -40,10 +40,11 @@ router.get("/api/search", (req, res)=>{
 /**
  * Response for GET method to retrieve conditional fundraisers from db
  */
-router.get("/api/search/:city?/:organizer?/:category?", (req, res) => {
+router.get("/api/search/:city?/:organizer?/:category?/:active", (req, res) => {
     const city = req.params.city && req.params.city.trim() !== '' ? req.params.city : null;
     const organizer = req.params.organizer && req.params.organizer.trim() !== '' ? req.params.organizer : null;
     const category = req.params.category && req.params.category.trim() !== '' ? req.params.category : null;
+    const active = req.params.active;
 
     let query = `
         SELECT * FROM FUNDRAISER 
@@ -64,6 +65,10 @@ router.get("/api/search/:city?/:organizer?/:category?", (req, res) => {
     if (category) {
         query += ` AND CATEGORY.NAME = ?`;
         queryParams.push(category);
+    }
+    if (active){
+        query += ` AND FUNDRAISER.ACTIVE = ?`;
+        queryParams.push(active);
     }
 
     console.log("Executing query:", query, queryParams);

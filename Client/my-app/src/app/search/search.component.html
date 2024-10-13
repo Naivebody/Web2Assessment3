@@ -17,6 +17,10 @@
       </option>
       </ng-container>
     </select>
+
+    <input type="checkbox" id="active" name="active" [(ngModel)]="isActive">
+    <label for="active">Is Active?</label>
+
     <input type="button" value="Search" (click)="getSpecificFundraiser()">
   </div>
   <div id="data" >

@@ -1,5 +1,5 @@
 /**
- * This is a search component that retrieves data on categories and fundraising projects from 
+ * This is a search component that retrieves data on categories and fundraising projects from
  * the DataService service class and implements search and clear functions.
  */
 import {Component, OnInit} from '@angular/core';
@@ -15,9 +15,9 @@ import {Fundraiser} from '../class/Fundraiser';
   styleUrl: './search.component.css'
 })
 /*
- * The SearchComponent implements the OnInit interface. isWarning Indicates whether to display warning information. 
- * imgNum is an array of numbers from 1 to 5 that are used for image presentation. categories Stores information for 
- * all categories. specificFundraisers stores a list of fundraisers with specific conditions. city, organizer, and 
+ * The SearchComponent implements the OnInit interface. isWarning Indicates whether to display warning information.
+ * imgNum is an array of numbers from 1 to 5 that are used for image presentation. categories Stores information for
+ * all categories. specificFundraisers stores a list of fundraisers with specific conditions. city, organizer, and
  * category are used to store the search criteria respectively
  */
 export class SearchComponent implements OnInit {
@@ -28,6 +28,8 @@ export class SearchComponent implements OnInit {
   city: string = '';
   organizer: string = '';
   category:string = '';
+  isActive: boolean = false;
+  active: number = 0;
   constructor(private dataService: DataService) {
   }
   /*
@@ -37,7 +39,7 @@ export class SearchComponent implements OnInit {
     this.getCategorieslist()
   }
 /*
- * Call dataService's getAllCategories method to get data for all categories from the server and assign 
+ * Call dataService's getAllCategories method to get data for all categories from the server and assign
  * them to the Categories array. When successful, print the data to the console.
  */
   getCategorieslist(){
@@ -49,13 +51,19 @@ export class SearchComponent implements OnInit {
     )
   }
 /*
- * The dataService's getFundraiserBySearch method, which searches by city, organizer, and category, 
- * retrieves a list of eligible fundraisers from the server and assigns them to an array of specificFundraisers. 
+ * The dataService's getFundraiserBySearch method, which searches by city, organizer, and category,
+ * retrieves a list of eligible fundraisers from the server and assigns them to an array of specificFundraisers.
  * Also, set isWarning to true to display the warning message.
  */
   getSpecificFundraiser(){
     this.isWarning = true;
-    this.dataService.getFundraiserBySearch(this.city, this.organizer,this.category).subscribe(
+    if(this.isActive){
+      this.active=1
+    }
+    else {
+      this.active=0;
+    }
+    this.dataService.getFundraiserBySearch(this.active,this.city, this.organizer,this.category).subscribe(
       (response: Fundraiser[]) => {
         this.specificFundraisers = response;
         console.log(this.specificFundraisers);

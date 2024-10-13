@@ -42,7 +42,7 @@ export class DataService {
    * @param category
    * @return {*} {Observable<Fundraiser>}
    */
-  getFundraiserBySearch(city?: string, organizer?: string, category?: string):Observable<Fundraiser[]> {
+  getFundraiserBySearch(active:number, city?: string, organizer?: string, category?: string):Observable<Fundraiser[]> {
     let url = `${this.apiUrl}/search`;
     const params  = [];
     if (city) {
@@ -62,16 +62,20 @@ export class DataService {
     }else{
       params.push(" ");
     }
+
+    if(active) {
+      params.push(active);
+    }
     if (params.length > 0 ) {
       url += '/' + params.join('/');
     }
     console.log(url);
-    if(url !== this.apiUrl +'/search/ '+'/ '+'/ '){
+    if(url !== this.apiUrl +'/search/ '+'/ '+'/ '+'/'+active){
     return this.http.get<FundraiserResponse[]>(url).pipe(
       map(data => data.map( item => new Fundraiser(item)))
     );
     }else{
-      alert("At least one criteria.");
+      alert("Except ACTIVE,at least one criteria is given.");
       return of([]);
     }
   }
