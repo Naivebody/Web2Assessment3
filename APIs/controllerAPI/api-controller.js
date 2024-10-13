@@ -44,12 +44,11 @@ router.get("/api/search/:city?/:organizer?/:category?/:active", (req, res) => {
     const city = req.params.city && req.params.city.trim() !== '' ? req.params.city : null;
     const organizer = req.params.organizer && req.params.organizer.trim() !== '' ? req.params.organizer : null;
     const category = req.params.category && req.params.category.trim() !== '' ? req.params.category : null;
-    const active = req.params.active;
+    const active = req.params.active.toString();
 
     let query = `
         SELECT * FROM FUNDRAISER 
         JOIN CATEGORY ON FUNDRAISER.CATEGORY_ID = CATEGORY.CATEGORY_ID 
-        WHERE ACTIVE = 1
     `;
 
     const queryParams = [];
@@ -66,10 +65,9 @@ router.get("/api/search/:city?/:organizer?/:category?/:active", (req, res) => {
         query += ` AND CATEGORY.NAME = ?`;
         queryParams.push(category);
     }
-    if (active){
         query += ` AND FUNDRAISER.ACTIVE = ?`;
         queryParams.push(active);
-    }
+
 
     console.log("Executing query:", query, queryParams);
     connection.query(query, queryParams, (err, records, fields) => {

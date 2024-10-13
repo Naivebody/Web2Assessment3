@@ -63,9 +63,8 @@ export class DataService {
       params.push(" ");
     }
 
-    if(active) {
-      params.push(active);
-    }
+    params.push(active);
+
     if (params.length > 0 ) {
       url += '/' + params.join('/');
     }

@@ -22,7 +22,7 @@ import {Fundraiser} from '../class/Fundraiser';
  */
 export class SearchComponent implements OnInit {
   isWarning: boolean = false;
-  imgNum : number[] =[1,2,3,4,5]
+  imgNum : number[] =[1,2,3,4]
   categories:Category[] = [];
   specificFundraisers : Fundraiser[] = [];
   city: string = '';
@@ -60,7 +60,7 @@ export class SearchComponent implements OnInit {
     if(this.isActive){
       this.active=1
     }
-    else {
+    else{
       this.active=0;
     }
     this.dataService.getFundraiserBySearch(this.active,this.city, this.organizer,this.category).subscribe(
