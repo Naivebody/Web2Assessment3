@@ -36,7 +36,7 @@ export class CreateComponent implements OnInit {
     }
 
     // Check if organizer is yyyy-mm-dd
-    if (!/^[A-Za-z\s]+$/.test(city)) {
+    if (!/^[A-Za-z\s]+$/.test(organizer)) {
       alert("Organizer can only contain space and letters.");
       return;
     }

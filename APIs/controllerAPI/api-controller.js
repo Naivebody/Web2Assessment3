@@ -163,13 +163,13 @@ router.post('/api/fundraiser', (req, res) => {
  */
 router.put('/api/fundraiser/:id', (req, res) => {
     const fundraiserId = req.params.id;
-    const { ORGANIZER, CAPTION, TARGET_Founding, CURRENT_FUNDING, CITY, ACTIVE, CATEGORY_ID } = req.body;
-    const query = 'UPDATE FUNDRAISER SET ORGANIZER = ?, CAPTION = ?, TARGET_Founding = ?, CURRENT_FUNDING = ?, CITY = ?, ACTIVE = ?, CATEGORY_ID = ? WHERE FUNDRAISE_ID = ?';
-    connection.query(query, [ORGANIZER, CAPTION, TARGET_Founding, CURRENT_FUNDING, CITY, ACTIVE, CATEGORY_ID, fundraiserId], (err, result) => {
+    const { ORGANIZER, CAPTION, TARGET_FUNDING, CURRENT_FUNDING, CITY, ACTIVE, CATEGORY_ID } = req.body;
+    const query = 'UPDATE FUNDRAISER SET ORGANIZER = ?, CAPTION = ?, TARGET_FUNDING = ?, CURRENT_FUNDING = ?, CITY = ?, ACTIVE = ?, CATEGORY_ID = ? WHERE FUNDRAISER_ID = ?';
+    connection.query(query, [ORGANIZER, CAPTION, TARGET_FUNDING, CURRENT_FUNDING, CITY, ACTIVE, CATEGORY_ID, fundraiserId], (err, result) => {
         if (err) {
             return res.status(500).send(err);
         }
-        res.json({ message: 'Fundraiser updated' });
+        res.json({ message: 'Fundraiser updated'});
     });
 });
 
@@ -178,23 +178,15 @@ router.put('/api/fundraiser/:id', (req, res) => {
  */
 router.delete('/api/fundraiser/:id', (req, res) => {
     const fundraiserId = req.params.id;
-    const checkQuery = 'SELECT * FROM DONATION WHERE FUNDRAISER_ID = ?';
-    connection.query(checkQuery, [fundraiserId], (err, results) => {
-        if (err) {
-            return res.status(500).send(err);
-        }
-        if (results.length > 0) {
-            return res.status(400).json({ message: 'Cannot delete fundraiser with donations' });
-        }
-        const deleteQuery = 'DELETE FROM FUNDRAISER WHERE FUNDRAISE_ID = ?';
-        db.query(deleteQuery, [fundraiserId], (err, result) => {
+        const deleteQuery = 'DELETE FROM FUNDRAISER WHERE FUNDRAISER_ID = ?';
+        connection.query(deleteQuery, [fundraiserId], (err, result) => {
             if (err) {
                 return res.status(500).send(err);
             }
             res.json({ message: 'Fundraiser deleted' });
         });
     });
-});
+
 
 module.exports = router;
 

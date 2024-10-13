@@ -40,3 +40,19 @@
   width: 1em;
   margin-right: 10px;
 }
+
+input[type="button"] {
+  margin-bottom: 10px;
+  width: 100%;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  background-color: #2980b9;
+  color: white;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+input[type="button"]:hover {
+  background-color: #1c598a;
+}

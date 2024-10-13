@@ -2,20 +2,22 @@
 <p>List below are existed fundraisers.You can edit or use navigator to create a new one</p>
 <nav><a routerLink="/home"><span>List</span></a> | <a routerLink="/create"><span>Create</span></a></nav>
 <div id="fundraiser">
-    <ng-container *ngFor="let item of fundraiser">
+    <ng-container *ngFor="let item of fundraiser;let i = index">
       <div class="info-column">
-    <ul >
-      <h3>Fundraiser {{item.fundraiserID}}</h3>
-      <li>ID:{{item.fundraiserID}}</li>
-      <li>Organizer:{{item.organizer}}</li>
-      <li>Category: {{item.categoryName}}</li>
-      <li>Caption: {{item.caption}}</li>
-      <li>City: {{item.city}}</li>
-      <li>Target Fund: {{item.target_funding}}</li>
-      <li>Current Fund: {{item.current_funding}}</li>
-      <li *ngIf="item.active===1">Active: {{isActive}}</li>
-      <li *ngIf="item.active===0">Active: {{inActive}}</li>
+    <ul>
+      <h3>Fundraiser {{i}}</h3>
+      <li>ID:  {{item.fundraiserID}}</li>
+      <li>Organizer:  {{item.organizer}}</li>
+      <li>Category:  {{item.categoryName}}</li>
+      <li>Caption:  {{item.caption}}</li>
+      <li>City:  {{item.city}}</li>
+      <li>Target Fund:  {{item.target_funding}}</li>
+      <li>Current Fund:  {{item.current_funding}}</li>
+      <li *ngIf="item.active===1">Active:  {{isActive}}</li>
+      <li *ngIf="item.active===0">Active:  {{inActive}}</li>
     </ul>
+        <input type="button" value="EDIT" [routerLink]="['/edit']" [queryParams]="{info:item.fundraiserID}">
+        <input type="button" value="DELETE" (click)="deleteFundraiser(item.fundraiserID)">
       </div>
     </ng-container>
 

@@ -20,7 +20,7 @@ export class DataService {
 
   /**
    * GET request method for Fundraiser list
-   * Here use map method to makesure the Fundraiser class attributes can match the data responded
+   * Here use map method to make sure the Fundraiser class attributes can match the data responded
    * @return {*} {Observable<Fundraiser[]>}
    */
   getAllFundraisers():Observable<Fundraiser[]> {
