@@ -33,9 +33,7 @@ export class DataService {
   }
 
   postFundraisertoDB(form:NgForm):Observable<any> {
-    return this.http.post<FundraiserResponse[]>(this.apiUrl+'/fundraiser', form).pipe(
-      map(data => data.map( item => new Fundraiser(item)))
-    );
+    return this.http.post<FundraiserResponse[]>(this.apiUrl+'/fundraiser', form);
   }
 
 }

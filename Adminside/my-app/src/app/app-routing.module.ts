@@ -4,10 +4,10 @@ import {HomeComponent} from './home/home.component';
 import {CreateComponent} from './create/create.component';
 
 const routes: Routes = [
+  {path: 'create', component: CreateComponent},
   {path: '', redirectTo: 'home', pathMatch: 'full'},
   {path: 'home', component: HomeComponent},
   {path: '**', redirectTo: ''},
-  {path: 'create', component: CreateComponent}
 ];
 
 @NgModule({

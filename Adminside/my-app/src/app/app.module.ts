@@ -22,7 +22,6 @@ import {NgForOf, NgIf} from '@angular/common';
     HttpClientModule,
     RouterLink,
     FormsModule,
-    FormsModule,
     NgForOf,
     NgIf
   ],

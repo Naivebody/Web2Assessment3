@@ -147,10 +147,11 @@ router.post('/api/donate', (req, res) => {
  * POST method API to insert a fundraiser record into db
  */
 router.post('/api/fundraiser', (req, res) => {
-    const { ORGANIZER, CAPTION, TARGET_Founding, CURRENT_FUNDING, CITY, ACTIVE, CATEGORY_ID } = req.body;
-    const query = 'INSERT INTO FUNDRAISER (ORGANIZER, CAPTION, TARGET_Founding, CURRENT_FUNDING, CITY, ACTIVE, CATEGORY_ID) VALUES (?, ?, ?, ?, ?, ?, ?)';
-    connection.query(query, [ORGANIZER, CAPTION, TARGET_Founding, CURRENT_FUNDING, CITY, ACTIVE, CATEGORY_ID], (err, result) => {
+    const { ORGANIZER, CAPTION, TARGET_FUNDING, CURRENT_FUNDING, CITY, ACTIVE, CATEGORY_ID } = req.body;
+    const query = 'INSERT INTO FUNDRAISER (ORGANIZER, CAPTION, TARGET_FUNDING, CURRENT_FUNDING, CITY, ACTIVE, CATEGORY_ID) VALUES (?, ?, ?, ?, ?, ?, ?)';
+    connection.query(query, [ORGANIZER, CAPTION, TARGET_FUNDING, CURRENT_FUNDING, CITY, ACTIVE, CATEGORY_ID], (err, result) => {
         if (err) {
+            console.log(err);
             return res.status(500).send(err);
         }
         res.json({ message: 'Fundraiser added', id: result.insertId });

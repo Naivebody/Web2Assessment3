@@ -1,34 +1,37 @@
-<nav><a routerLink="/home"><span>List</span></a> | <a routerLink="/create"><span>Create</span></a></nav>
+<nav><a routerLink="/home"><span>List</span></a> | <a routerLink="create"><span>Create</span></a></nav>
 <form #createForm="ngForm" (ngSubmit)="onSave(createForm)">
-  <label for="organizer">Organizer:</label>
-  <input type="text" id="organizer" name="ORGANIZER" ngModel required maxlength="30" placeholder="Enter your name or company name">
-
-  <label for="category">Category:</label>
-  <select [(ngModel)]="categories" id="category" name="CATEGORY_ID" ngModel required>
-    <ng-container *ngIf="categories.length>0">
-      <ng-container *ngFor="let item of categories;let i=index">
-      <option value="{{item.CATEGORY_ID}}" type="number">
-        {{item.NAME}}
-      </option>
+  <div class="form-group">
+    <label for="organizer">Organizer:</label>
+    <input type="text" id="organizer" name="ORGANIZER" ngModel required maxlength="30" placeholder="Enter your name or company name">
+  </div>
+  <div class="form-group">
+    <label for="category">Category:</label>
+    <select id="category" name="CATEGORY_ID" ngModel required>
+      <option value="">Select a category</option>
+      <ng-container *ngIf="categories.length > 0">
+        <option *ngFor="let item of categories" [value]="item.CATEGORY_ID">{{item.NAME}}</option>
       </ng-container>
-    </ng-container>
-  </select>
-
-  <label for="city">City:</label>
-  <input type="text" id="city" name="CITY" ngModel required placeholder="Enter fundraise city of activities" maxlength="20">
-
-  <label for="target fund">Target funding amount:</label>
-  <input type="number" id="target fund" name="TARGET_FUNDING" ngModel required placeholder="Enter your target fund money">
-
-  <label for="current fund">Current funding amount:</label>
-  <input type="number" id="current fund" name="CURRENT_FUNDING" ngModel required placeholder="Enter current fund money you already get">
-
-  <label for="active">Is Active?:</label>
-  <input type="checkbox" id="active" name="ACTIVE" ngModel required [(ngModel)]="isActive">
-
-  <label for="caption">Amount:</label>
-  <input type="text" id="caption" name="CAPTION" ngModel required placeholder="Enter your short description here" maxlength="20">
-
-
+    </select>
+  </div>
+  <div class="form-group">
+    <label for="city">City:</label>
+    <input type="text" id="city" name="CITY" ngModel required placeholder="Enter fundraise city of activities" maxlength="20">
+  </div>
+  <div class="form-group">
+    <label for="target fund">Target funding amount:</label>
+    <input type="number" id="target fund" name="TARGET_FUNDING" ngModel required placeholder="Enter your target fund money">
+  </div>
+  <div class="form-group">
+    <label for="current fund">Current funding amount:</label>
+    <input type="number" id="current fund" name="CURRENT_FUNDING" ngModel required placeholder="Enter current fund money you already get">
+  </div>
+  <div class="form-group checkbox-group">
+    <input type="checkbox" id="active" name="ACTIVE" ngModel [(ngModel)]="isActive">
+    <label for="active">Is Active?</label>
+  </div>
+  <div class="form-group">
+    <label for="caption">Caption:</label>
+    <input type="text" id="caption" name="CAPTION" ngModel required placeholder="Enter your short description here" maxlength="20">
+  </div>
   <button type="submit" [disabled]="!createForm.form.valid">Save</button>
 </form>

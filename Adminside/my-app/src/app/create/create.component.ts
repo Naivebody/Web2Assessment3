@@ -12,7 +12,7 @@ import {Router} from '@angular/router';
 export class CreateComponent implements OnInit {
   categories: Category[]=[];
   isActive:boolean = false;
-
+  active:number = 0;
   constructor(private dataService: DataService,private redirect: Router) {
   }
   ngOnInit() {
@@ -40,7 +40,10 @@ export class CreateComponent implements OnInit {
       alert("Organizer can only contain space and letters.");
       return;
     }
-
+    if(this.isActive){
+      this.active=1;
+    }
+    form.value.ACTIVE=this.active;
     //The data submitted by the form is processed and sent to the server
     if (form.valid) {
       console.log('Form Data:', form.value);
