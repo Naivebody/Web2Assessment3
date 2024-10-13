@@ -117,6 +117,19 @@ router.get("/api/fundraiser/donation/:id", (req, res)=>{
 })
 
 /**
+ * Response for GET method to retrieve all fundraisers and their category
+ */
+router.get("/api/fundraisers", (req, res)=>{
+    connection.query("select * from FUNDRAISER  JOIN CATEGORY ON FUNDRAISER.CATEGORY_ID = CATEGORY.CATEGORY_ID ORDER BY FUNDRAISER_ID ", (err, records,fields)=> {
+        if (err){
+            console.error("Error while retrieve the data (All active fundraisers)");
+        }else{
+            res.send(records);
+        }
+    })
+})
+
+/**
  * Post method API to insert a donation record into db
  */
 router.post('/api/donate', (req, res) => {
