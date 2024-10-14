@@ -15,7 +15,7 @@ connection.connect();
  * Response for GET method to retrieve all active fundraisers and their category
  */
 router.get("/api/home", (req, res)=>{
-    connection.query("select * from FUNDRAISER  JOIN CATEGORY ON FUNDRAISER.CATEGORY_ID = CATEGORY.CATEGORY_ID where ACTIVE=1", (err, records,fields)=> {
+    connection.query("select * from fundraiser  JOIN category ON fundraiser.CATEGORY_ID = category.CATEGORY_ID where ACTIVE=1", (err, records,fields)=> {
         if (err){
             console.error("Error while retrieve the data (All active fundraisers)");
         }else{
@@ -28,7 +28,7 @@ router.get("/api/home", (req, res)=>{
  * Response for GET method to retrieve all categories from db
  */
 router.get("/api/search", (req, res)=>{
-    connection.query("select * from CATEGORY", (err, records,fields)=> {
+    connection.query("select * from category", (err, records,fields)=> {
         if (err){
             console.error("Error while retrieve the data (All category)");
         }else{
@@ -47,25 +47,25 @@ router.get("/api/search/:city?/:organizer?/:category?/:active", (req, res) => {
     const active = req.params.active.toString();
 
     let query = `
-        SELECT * FROM FUNDRAISER 
-        JOIN CATEGORY ON FUNDRAISER.CATEGORY_ID = CATEGORY.CATEGORY_ID 
+        SELECT * FROM fundraiser
+        JOIN category ON fundraiser.CATEGORY_ID = category.CATEGORY_ID 
     `;
 
     const queryParams = [];
 
     if (city) {
-        query += ` AND FUNDRAISER.CITY = ?`;
+        query += ` AND fundraiser.CITY = ?`;
         queryParams.push(city);
     }
     if (organizer) {
-        query += ` AND FUNDRAISER.ORGANIZER = ?`;
+        query += ` AND fundraiser.ORGANIZER = ?`;
         queryParams.push(organizer);
     }
     if (category) {
-        query += ` AND CATEGORY.NAME = ?`;
+        query += ` AND category.NAME = ?`;
         queryParams.push(category);
     }
-        query += ` AND FUNDRAISER.ACTIVE = ?`;
+        query += ` AND fundraiser.ACTIVE = ?`;
         queryParams.push(active);
 
 
@@ -89,7 +89,7 @@ router.get("/api/search/:city?/:organizer?/:category?/:active", (req, res) => {
  */
 router.get("/api/fundraiser/:id", (req, res)=>{
     const sql = "select * from FUNDRAISER " +
-        "JOIN CATEGORY ON FUNDRAISER.CATEGORY_ID = CATEGORY.CATEGORY_ID " +
+        "JOIN category ON fundraiser.CATEGORY_ID = category.CATEGORY_ID " +
         "where FUNDRAISER_ID=" + req.params.id
     connection.query(sql, (err, records)=> {
         if (err){
@@ -105,7 +105,7 @@ router.get("/api/fundraiser/:id", (req, res)=>{
  * Response for GET method to retrieve donation details by FundraiserID from db
  */
 router.get("/api/fundraiser/donation/:id", (req, res)=>{
-    const sql = "select * from DONATION where FUNDRAISER_ID= " + req.params.id ;
+    const sql = "select * from donation where FUNDRAISER_ID= " + req.params.id ;
     connection.query(sql, (err, records)=> {
         if (err){
             console.error("Error while retrieve the data (DONATION)");
@@ -120,7 +120,7 @@ router.get("/api/fundraiser/donation/:id", (req, res)=>{
  * Response for GET method to retrieve all fundraisers and their category
  */
 router.get("/api/fundraisers", (req, res)=>{
-    connection.query("select * from FUNDRAISER  JOIN CATEGORY ON FUNDRAISER.CATEGORY_ID = CATEGORY.CATEGORY_ID ORDER BY FUNDRAISER_ID ", (err, records,fields)=> {
+    connection.query("select * from fundraiser  JOIN category ON fundraiser.CATEGORY_ID = category.CATEGORY_ID ORDER BY FUNDRAISER_ID ", (err, records,fields)=> {
         if (err){
             console.error("Error while retrieve the data (All active fundraisers)");
         }else{
@@ -134,7 +134,7 @@ router.get("/api/fundraisers", (req, res)=>{
  */
 router.post('/api/donate', (req, res) => {
     const { DATE, AMOUNT, GIVER, FUNDRAISER_ID } = req.body;
-    const query = 'INSERT INTO DONATION (DATE, AMOUNT, GIVER, FUNDRAISER_ID) VALUES (?, ?, ?, ?)';
+    const query = 'INSERT INTO donation (DATE, AMOUNT, GIVER, FUNDRAISER_ID) VALUES (?, ?, ?, ?)';
     connection.query(query, [DATE, AMOUNT, GIVER, FUNDRAISER_ID], (err, result) => {
         if (err) {
             return res.status(500).send(err);
@@ -148,7 +148,7 @@ router.post('/api/donate', (req, res) => {
  */
 router.post('/api/fundraiser', (req, res) => {
     const { ORGANIZER, CAPTION, TARGET_FUNDING, CURRENT_FUNDING, CITY, ACTIVE, CATEGORY_ID } = req.body;
-    const query = 'INSERT INTO FUNDRAISER (ORGANIZER, CAPTION, TARGET_FUNDING, CURRENT_FUNDING, CITY, ACTIVE, CATEGORY_ID) VALUES (?, ?, ?, ?, ?, ?, ?)';
+    const query = 'INSERT INTO fundraiser (ORGANIZER, CAPTION, TARGET_FUNDING, CURRENT_FUNDING, CITY, ACTIVE, CATEGORY_ID) VALUES (?, ?, ?, ?, ?, ?, ?)';
     connection.query(query, [ORGANIZER, CAPTION, TARGET_FUNDING, CURRENT_FUNDING, CITY, ACTIVE, CATEGORY_ID], (err, result) => {
         if (err) {
             console.log(err);
@@ -164,7 +164,7 @@ router.post('/api/fundraiser', (req, res) => {
 router.put('/api/fundraiser/:id', (req, res) => {
     const fundraiserId = req.params.id;
     const { ORGANIZER, CAPTION, TARGET_FUNDING, CURRENT_FUNDING, CITY, ACTIVE, CATEGORY_ID } = req.body;
-    const query = 'UPDATE FUNDRAISER SET ORGANIZER = ?, CAPTION = ?, TARGET_FUNDING = ?, CURRENT_FUNDING = ?, CITY = ?, ACTIVE = ?, CATEGORY_ID = ? WHERE FUNDRAISER_ID = ?';
+    const query = 'UPDATE fundraiser SET ORGANIZER = ?, CAPTION = ?, TARGET_FUNDING = ?, CURRENT_FUNDING = ?, CITY = ?, ACTIVE = ?, CATEGORY_ID = ? WHERE FUNDRAISER_ID = ?';
     connection.query(query, [ORGANIZER, CAPTION, TARGET_FUNDING, CURRENT_FUNDING, CITY, ACTIVE, CATEGORY_ID, fundraiserId], (err, result) => {
         if (err) {
             return res.status(500).send(err);
@@ -178,7 +178,7 @@ router.put('/api/fundraiser/:id', (req, res) => {
  */
 router.delete('/api/fundraiser/:id', (req, res) => {
     const fundraiserId = req.params.id;
-        const deleteQuery = 'DELETE FROM FUNDRAISER WHERE FUNDRAISER_ID = ?';
+        const deleteQuery = 'DELETE FROM fundraiser WHERE FUNDRAISER_ID = ?';
         connection.query(deleteQuery, [fundraiserId], (err, result) => {
             if (err) {
                 return res.status(500).send(err);
