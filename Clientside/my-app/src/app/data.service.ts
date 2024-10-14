@@ -15,7 +15,7 @@ import {NgForm} from '@angular/forms';
   providedIn: 'root'
 })
 export class DataService {
-  private apiUrl = 'http://localhost:3060/api';
+  private apiUrl = 'http://https://24275235.it.scu.edu.au/api';
   constructor(private http: HttpClient) { }
 
   /**
