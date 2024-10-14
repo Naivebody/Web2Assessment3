@@ -3,7 +3,7 @@ import {Category} from '../class/Category';
 import {DataService} from '../data.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {NgForm} from '@angular/forms';
-import {Fundraiser} from '../Class/Fundraiser';
+import {Fundraiser} from '../class/Fundraiser';
 /**
  * @Component The decorator defines component metadata
  * @selector Defines the selector for the component
@@ -66,8 +66,8 @@ export class EditComponent implements OnInit {
   }
   /**
    * Handles form submission events, performs data validation, and sends data to the server
-   * @param form 
-   * @returns 
+   * @param form
+   * @returns
    */
   onSave(form: NgForm) {
     const target = form.value.TARGET_FUNDING;
