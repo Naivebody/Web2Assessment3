@@ -88,7 +88,7 @@ router.get("/api/search/:city?/:organizer?/:category?/:active", (req, res) => {
  * Response for GET method to retrieve fundraiser details by ID from db
  */
 router.get("/api/fundraiser/:id", (req, res)=>{
-    const sql = "select * from FUNDRAISER " +
+    const sql = "select * from fundraiser " +
         "JOIN category ON fundraiser.CATEGORY_ID = category.CATEGORY_ID " +
         "where FUNDRAISER_ID=" + req.params.id
     connection.query(sql, (err, records)=> {
