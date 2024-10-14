@@ -9,15 +9,16 @@ import {AdmincreateComponent} from './admincreate/admincreate.component';
 import {AdmineditComponent} from './adminedit/adminedit.component';
 
 const routes: Routes = [
+  {path: 'adminhome', component: AdminhomeComponent},
+  {path: 'create', component: AdmincreateComponent},
+  {path: 'edit', component: AdmineditComponent},
   {path: 'home',component: HomeComponent},
   {path: 'search',component: SearchComponent},
   {path: 'fundraiser',component: FundraiserDetailComponent},
   {path: '', redirectTo: 'home', pathMatch: 'full'},
   {path: 'donate',component: DonateComponent},
   {path: '**', redirectTo: ''},
-  {path: 'adminhome', component: AdminhomeComponent},
-  {path: 'create', component: AdmincreateComponent},
-  {path: 'edit', component: AdmineditComponent},
+
 ];
 
 @NgModule({
