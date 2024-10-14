@@ -11,11 +11,11 @@ import {Fundraiser} from '../class/Fundraiser';
  * @styleUrl specifies the CSS style file for the component
  */
 @Component({
-  selector: 'app-edit',
-  templateUrl: './edit.component.html',
-  styleUrl: './edit.component.css'
+  selector: 'app-adminedit',
+  templateUrl: './adminedit.component.html',
+  styleUrl: './adminedit.component.css'
 })
-export class EditComponent implements OnInit {
+export class AdmineditComponent implements OnInit {
   // Use @ViewChild to get the form reference in the template
   @ViewChild('editForm') editForm!: NgForm
   //The ID of the fundraising project
@@ -131,4 +131,3 @@ export class EditComponent implements OnInit {
 
 
 }
-

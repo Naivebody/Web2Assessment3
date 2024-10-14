@@ -117,5 +117,36 @@ export class DataService {
     return this.http.post<Donation>(`${this.apiUrl}/donate`,form);
   }
 
+  /**
+   * GET request method for Fundraiser list
+   * @return {*} {Observable<Fundraiser[]>}
+   */
+  getAllExistFundraisers():Observable<Fundraiser[]> {
+    return this.http.get<FundraiserResponse[]>(this.apiUrl+'/fundraisers').pipe(
+      map(data => data.map( item => new Fundraiser(item)))
+    );
+  }
+
+  /**
+   * POST request method for add fundraiser to DB
+   * @param form
+   */
+  postFundraisertoDB(form:NgForm):Observable<any> {
+    return this.http.post<any>(this.apiUrl+'/fundraiser', form);
+  }
+
+  /**
+   * PUT request method for edit fundraiser by ID to DB
+   * @param form
+   */
+  putFundraisertoDB(ID:number,form:NgForm):Observable<any> {
+    return this.http.put<any>(this.apiUrl+'/fundraiser/'+ID, form);
+  }
+
+
+  deleteFundraiserByID(ID:number):Observable<any> {
+    return this.http.delete<any>(this.apiUrl+'/fundraiser/'+ID);
+  }
+
 
 }

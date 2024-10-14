@@ -8,6 +8,11 @@ import { SearchComponent } from './search/search.component';
 import { FundraiserDetailComponent } from './fundraiser-detail/fundraiser-detail.component';
 import {FormsModule} from "@angular/forms";
 import { DonateComponent } from './donate/donate.component';
+import { AdminhomeComponent } from './adminhome/adminhome.component';
+import {NgForOf, NgIf} from "@angular/common";
+import {RouterLink} from "@angular/router";
+import { AdmincreateComponent } from './admincreate/admincreate.component';
+import { AdmineditComponent } from './adminedit/adminedit.component';
 
 
 @NgModule({
@@ -16,14 +21,28 @@ import { DonateComponent } from './donate/donate.component';
     HomeComponent,
     SearchComponent,
     FundraiserDetailComponent,
-    DonateComponent
+    DonateComponent,
+    AdminhomeComponent,
+    AdmincreateComponent,
+    AdmineditComponent
   ],
-    imports: [
-        BrowserModule,
-        AppRoutingModule,
-        HttpClientModule,
-        FormsModule
-    ],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    HttpClientModule,
+    FormsModule,
+    NgForOf,
+    NgIf,
+    RouterLink,
+    FormsModule,
+    NgForOf,
+    NgIf,
+    RouterLink,
+    FormsModule,
+    NgForOf,
+    NgIf,
+    RouterLink
+  ],
   providers: [
     provideClientHydration()
   ],
