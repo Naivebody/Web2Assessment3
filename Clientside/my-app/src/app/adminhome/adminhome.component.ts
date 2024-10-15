@@ -51,7 +51,7 @@ export class AdminhomeComponent implements OnInit {
     this.dataService.deleteFundraiserByID(id).subscribe(
       data => {
         alert(data.message);
-        window.location.reload();
+        this.getFundraiser();
       }
     )
   }
